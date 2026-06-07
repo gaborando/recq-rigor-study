@@ -34,6 +34,16 @@ class CellSpec:
     rep: int
     budget: BudgetCfg
     perf: dict
+    topology: str = "single"   # single | micro
+
+
+def arm_cfg(arm_key: str, topology: str) -> dict:
+    """Resolve an arm's config for a topology: base keys overlaid by
+    topologies.<topology> (skeleton, runtime_compose, micro_clause)."""
+    arm = dict(load("arms")["arms"][arm_key])
+    topo = arm.pop("topologies", {}).get(topology, {})
+    arm.update(topo)
+    return arm
 
 
 def harness_git_sha() -> str:
@@ -57,13 +67,14 @@ def expand_profile(profile: str) -> list[CellSpec]:
         for c in p["cells"]:
             for rep in range(1, reps + 1):
                 cells.append(CellSpec(c["domain"], c["arm"], c["model"], c["task"],
-                                      rep, budget, perf))
+                                      rep, budget, perf, c.get("topology", "single")))
     else:  # full cartesian product
-        for domain in p["domains"]:
-            for arm in p["arms"]:
-                for model in p["models"]:
-                    for task in p["tasks"]:
-                        for rep in range(1, reps + 1):
-                            cells.append(CellSpec(domain, arm, model, task,
-                                                  rep, budget, perf))
+        for topology in p.get("topologies", ["single"]):
+            for domain in p["domains"]:
+                for arm in p["arms"]:
+                    for model in p["models"]:
+                        for task in p["tasks"]:
+                            for rep in range(1, reps + 1):
+                                cells.append(CellSpec(domain, arm, model, task,
+                                                      rep, budget, perf, topology))
     return cells

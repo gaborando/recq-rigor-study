@@ -15,7 +15,9 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .config import REPO, RUNS, CellSpec, load
+from .config import REPO, RUNS, CellSpec, arm_cfg, load
+
+MICRO_SERVICES = ["edge", "orders", "inventory", "customers"]
 
 GIT_ID = ["-c", "user.email=harness@recq-rigor-study", "-c", "user.name=harness"]
 
@@ -86,12 +88,14 @@ class Workspace:
 
 def make_run_id(cell: CellSpec) -> str:
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    return f"{cell.domain}__{cell.arm}__{cell.model}__{cell.task}__rep{cell.rep}__{ts}"
+    return (f"{cell.domain}__{cell.arm}__{cell.topology}__{cell.model}__"
+            f"{cell.task}__rep{cell.rep}__{ts}")
 
 
 def _resolve_t1_workspace(cell: CellSpec) -> Path:
     """For T2: find the same cell's most recent T1 final workspace."""
-    prefix = f"{cell.domain}__{cell.arm}__{cell.model}__t1__rep{cell.rep}__"
+    prefix = (f"{cell.domain}__{cell.arm}__{cell.topology}__{cell.model}__"
+              f"t1__rep{cell.rep}__")
     candidates = sorted(d for d in RUNS.iterdir() if d.name.startswith(prefix))
     if not candidates:
         raise FileNotFoundError(f"no T1 run found for cell prefix {prefix}")
@@ -99,8 +103,7 @@ def _resolve_t1_workspace(cell: CellSpec) -> Path:
 
 
 def provision(cell: CellSpec) -> Workspace:
-    arms = load("arms")["arms"]
-    arm = arms[cell.arm]
+    arm = arm_cfg(cell.arm, cell.topology)
     run_id = make_run_id(cell)
     root = RUNS / run_id
     ws = root / "workspace"
@@ -130,6 +133,8 @@ def provision(cell: CellSpec) -> Workspace:
     for f in acc_src.glob("*.py"):
         if cell.task == "t1" and f.name.startswith("test_t2"):
             continue  # T2 material must not leak into T1 workspaces
+        if f.name.startswith("test_chaos"):
+            continue  # chaos tests are harness-driven, never shipped to the agent
         shutil.copy(f, acc_dst / f.name)
 
     docs_src = REPO / arm["docs_pack"]
@@ -151,22 +156,50 @@ def provision(cell: CellSpec) -> Workspace:
     return w
 
 
-def start_infra(w: Workspace) -> None:
-    """Bring up the per-run compose project and write .run-env."""
-    w.compose("up", "-d", "--wait")
-    w.app_port = free_port()
-    env = {"PORT": str(w.app_port), "TASK": w.cell.task}
-
+def _broker_env(w: Workspace, env: dict) -> None:
     if w.cell.arm == "arm_a_evento":
         env["EVENTO_HOST"] = "localhost"
         env["EVENTO_PORT"] = str(w.service_port("evento-server", 3030))
         env["EVENTO_HTTP_PORT"] = str(w.service_port("evento-server", 3000))
+    elif w.cell.arm == "arm_c_axon" and w.cell.topology == "micro":
+        env["AXON_HOST"] = "localhost"
+        env["AXON_PORT"] = str(w.service_port("axonserver", 8124))
+
+
+def start_infra(w: Workspace) -> None:
+    """Bring up the per-run compose project and write .run-env."""
+    w.compose("up", "-d", "--wait")
+    if w.cell.topology == "micro":
+        _start_infra_micro(w)
+        return
+    w.app_port = free_port()
+    env = {"PORT": str(w.app_port), "TASK": w.cell.task, "TOPOLOGY": "single"}
+    _broker_env(w, env)
+    if w.cell.arm == "arm_a_evento":
         env["DB_URL"] = f"jdbc:postgresql://localhost:{w.service_port('appdb', 5432)}/app"
     else:
         env["DB_URL"] = f"jdbc:postgresql://localhost:{w.service_port('database', 5432)}/app"
     env["DB_USER"] = "postgres"
     env["DB_PASS"] = "secret"
+    w.env = env
+    (w.dir / ".run-env").write_text("".join(f"{k}={v}\n" for k, v in env.items()))
 
+
+def _start_infra_micro(w: Workspace) -> None:
+    """Micro env contract consumed by scripts/up.sh and per-service properties:
+    <SVC>_PORT (host), <SVC>_URL (http base), <SVC>_DB_URL (jdbc), broker coords."""
+    ports = {svc: free_port() for svc in MICRO_SERVICES}
+    w.app_port = ports["edge"]  # the acceptance suite talks to edge only
+    env = {"TASK": w.cell.task, "TOPOLOGY": "micro",
+           "PORT": str(ports["edge"]), "DB_USER": "postgres", "DB_PASS": "secret"}
+    for svc in MICRO_SERVICES:
+        env[f"{svc.upper()}_PORT"] = str(ports[svc])
+        env[f"{svc.upper()}_URL"] = f"http://localhost:{ports[svc]}"
+        # edge owns no DB; the other three each get a dedicated Postgres container
+        if svc != "edge":
+            env[f"{svc.upper()}_DB_URL"] = \
+                f"jdbc:postgresql://localhost:{w.service_port(f'{svc}-db', 5432)}/{svc}"
+    _broker_env(w, env)
     w.env = env
     (w.dir / ".run-env").write_text("".join(f"{k}={v}\n" for k, v in env.items()))
 
@@ -179,8 +212,11 @@ def reset_infra(w: Workspace) -> None:
 
 
 def teardown(w: Workspace) -> None:
+    # stop leftover app process(es) first, then infra
+    if w.cell.topology == "micro":
+        sh(["bash", "scripts/down.sh"], cwd=w.dir, check=False, timeout=120)
+    else:
+        pid = w.dir / ".app.pid"
+        if pid.exists():
+            sh(["bash", "scripts/app.sh", "stop"], cwd=w.dir, check=False)
     w.compose("down", "-v", check=False)
-    # stop a leftover app process if any
-    pid = w.dir / ".app.pid"
-    if pid.exists():
-        sh(["bash", "scripts/app.sh", "stop"], cwd=w.dir, check=False)

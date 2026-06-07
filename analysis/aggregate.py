@@ -21,9 +21,11 @@ def flatten(record: dict) -> dict:
     f = record["functional"]
     s = record["static_quality"]
     conf = record["conformance"]
+    res = record.get("resilience", {})
     row = {
         "run_id": record["run_id"],
         "domain": c["domain"], "arm": c["arm"], "model": c["model"],
+        "topology": c.get("topology", "single"),
         "task": c["task"], "rep": c["rep"],
         "budget_exhausted": record["budget"]["exhausted"],
         # TIME
@@ -68,6 +70,12 @@ def flatten(record: dict) -> dict:
         row.update(t2_files_touched=record["t2"]["files_touched"],
                    t2_diff_added=record["t2"]["diff_loc_added"],
                    t2_diff_deleted=record["t2"]["diff_loc_deleted"])
+    if res.get("measured"):
+        scen = {s["name"]: s for s in res.get("scenarios", [])}
+        row["chaos_passed"] = sum(1 for s in scen.values() if s.get("passed"))
+        row["chaos_total"] = len(scen)
+        for name in ("crash_mid_burst", "full_restart", "saga_under_downed_dep"):
+            row[f"chaos_{name}"] = scen.get(name, {}).get("passed")
     return row
 
 
@@ -80,7 +88,7 @@ def main() -> None:
     df.to_csv(OUT, index=False)
     print(f"{len(df)} runs -> {OUT}")
     if len(df):
-        print(df.groupby(["domain", "arm", "model", "task"])[
+        print(df.groupby(["domain", "topology", "arm", "task"])[
             ["acceptance_pass_rate", "cost_usd", "wall_seconds"]].mean(numeric_only=True))
 
 

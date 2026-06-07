@@ -25,6 +25,11 @@ class CostSource(StrEnum):
     ESTIMATED = "estimated"    # tokenizer estimate over transcript (flagged, last resort)
 
 
+class Topology(StrEnum):
+    SINGLE = "single"   # one deployable
+    MICRO = "micro"     # independent services, database-per-service
+
+
 class Cell(BaseModel):
     """The experimental unit identity."""
     domain: str                 # e.g. "order-inventory"
@@ -32,6 +37,7 @@ class Cell(BaseModel):
     model: str                  # registry key in config/models.yaml
     model_id: str               # the exact pinned model identifier
     task: Task
+    topology: Topology = Topology.SINGLE
     rep: int = Field(ge=1)
     seed: Optional[int] = None  # sampling seed when the CLI supports one
 
@@ -160,6 +166,20 @@ class Conformance(BaseModel):
     strict_confinement_would_fail: Optional[bool] = None   # arm A only
 
 
+class ResilienceScenario(BaseModel):
+    name: str                                # crash_mid_burst | full_restart | saga_under_downed_dep
+    passed: Optional[bool] = None
+    recovery_seconds: Optional[float] = None
+    detail: Optional[str] = None
+
+
+class Resilience(BaseModel):
+    """Micro-topology chaos outcomes (None/empty for single topology)."""
+    measured: bool = False
+    skip_reason: Optional[str] = None
+    scenarios: list[ResilienceScenario] = []
+
+
 class T2Info(BaseModel):
     seeded_from_run_id: Optional[str] = None
     skipped_t1_failed: bool = False
@@ -181,5 +201,6 @@ class RunRecord(BaseModel):
     functional: Functional
     static_quality: StaticQuality
     conformance: Conformance
+    resilience: Resilience = Resilience()
     t2: Optional[T2Info] = None
     notes: list[str] = []

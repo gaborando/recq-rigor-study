@@ -5,6 +5,9 @@ docker_images:
   evento_server:
     ref: eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4
     resolved_at: '2026-06-07'
+  axon_server:
+    ref: axoniq/axonserver:2025.1.4@sha256:12a9ec5835a389c3a71f2449df06aa514dbf4344fd9359171a61b99492c5c1bb
+    resolved_at: '2026-06-07'
   build_image:
     ref: maven:3.9-eclipse-temurin-21
     resolved_at: null

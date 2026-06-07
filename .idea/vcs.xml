@@ -2,7 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/runs/order-inventory__arm_a_evento__claude-sonnet__t1__rep1__20260607T140530Z/workspace" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/runs/order-inventory__arm_b_spring__claude-sonnet__t1__rep1__20260607T134206Z/workspace" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/runs/order-inventory__arm_b_spring__claude-sonnet__t2__rep1__20260607T145710Z/workspace" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/runs/order-inventory__arm_b_spring__null-agent__t1__rep1__20260607T105139Z/workspace" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/runs/order-inventory__arm_c_axon__claude-sonnet__t1__rep1__20260607T143036Z/workspace" vcs="Git" />
   </component>
 </project>

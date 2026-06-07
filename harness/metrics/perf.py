@@ -40,9 +40,9 @@ def _k6_cmd(w: Workspace, summary: str) -> list[str]:
 
 
 class _MemSampler(threading.Thread):
-    def __init__(self, pid: int | None, compose_project: str):
+    def __init__(self, pids: list[int], compose_project: str):
         super().__init__(daemon=True)
-        self.pid = pid
+        self.pids = pids  # one (single) or several (micro: all service JVMs)
         self.project = compose_project
         self.app_rss: list[float] = []
         self.infra_mb: list[float] = []
@@ -50,11 +50,15 @@ class _MemSampler(threading.Thread):
 
     def run(self) -> None:
         while not self.stop_flag.is_set():
-            if self.pid:
-                r = subprocess.run(["ps", "-o", "rss=", "-p", str(self.pid)],
-                                   capture_output=True, text=True)
-                if r.returncode == 0 and r.stdout.strip():
-                    self.app_rss.append(int(r.stdout.strip()) / 1024.0)  # KiB -> MiB
+            if self.pids:
+                total = 0.0
+                for pid in self.pids:
+                    r = subprocess.run(["ps", "-o", "rss=", "-p", str(pid)],
+                                       capture_output=True, text=True)
+                    if r.returncode == 0 and r.stdout.strip():
+                        total += int(r.stdout.strip()) / 1024.0  # KiB -> MiB
+                if total:
+                    self.app_rss.append(total)
             r = subprocess.run(
                 ["docker", "stats", "--no-stream", "--format", "{{.Name}} {{.MemUsage}}"],
                 capture_output=True, text=True)
@@ -92,9 +96,10 @@ def _endpoint_stats(summary: dict, endpoint: str) -> dict | None:
             "rps": 0.0, "error_rate": 0.0}
 
 
-def measure(w: Workspace, app_pid: int | None) -> dict:
+def measure(w: Workspace, app_pids: list[int] | int | None) -> dict:
+    pids = app_pids if isinstance(app_pids, list) else ([app_pids] if app_pids else [])
     summary_path = w.root / "reports" / "k6-summary.json"
-    sampler = _MemSampler(app_pid, w.compose_project)
+    sampler = _MemSampler(pids, w.compose_project)
     sampler.start()
     started = time.monotonic()
     r = sh(_k6_cmd(w, str(summary_path)), cwd=REPO, check=False, timeout=3600)

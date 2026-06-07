@@ -60,8 +60,11 @@ When the suite is fully green, stop and summarize what you changed.
 
 
 def build_prompt(cell: CellSpec) -> str:
-    arm = load("arms")["arms"][cell.arm]
+    from .config import arm_cfg
+    arm = arm_cfg(cell.arm, cell.topology)
     constraint = arm["constraint_clause"].strip()
+    if cell.topology == "micro" and arm.get("micro_clause"):
+        constraint += "\n\n" + arm["micro_clause"].strip()
     evento = ", Evento server" if cell.arm == "arm_a_evento" else ""
     tpl = T1_TEMPLATE if cell.task == "t1" else T2_TEMPLATE
     return tpl.format(constraint=constraint, evento=evento)

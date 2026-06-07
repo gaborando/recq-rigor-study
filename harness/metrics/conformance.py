@@ -10,10 +10,14 @@ from ..workspace import Workspace, sh
 
 def compute(w: Workspace, strict_confinement_would_fail: bool | None) -> dict:
     arm_key = load("arms")["arms"][w.cell.arm]["archunit_arm"]
-    classes = w.dir / "target" / "classes"
+    # single: one module's classes. micro: import the whole reactor tree (the
+    # ClassFileImporter picks up every */target/classes across all services).
+    classes = w.dir if w.cell.topology == "micro" else w.dir / "target" / "classes"
+    has_classes = (w.cell.topology == "micro" and any(w.dir.rglob("target/classes"))) \
+        or (w.cell.topology == "single" and classes.exists())
     out: dict = {"measured": False, "rules": [],
                  "strict_confinement_would_fail": strict_confinement_would_fail}
-    if classes.exists():
+    if has_classes:
         r = sh(["mvn", "-q", "compile", "exec:java",
                 f"-Dconformance.classes={classes}", f"-Dconformance.arm={arm_key}"],
                cwd=REPO / "archunit", check=False, timeout=600)

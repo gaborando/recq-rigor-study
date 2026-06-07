@@ -10,10 +10,12 @@ from datetime import datetime, timezone
 from . import build_boot
 from .agents.claude_code import get_adapter
 from .config import CellSpec, harness_git_sha, load
-from .metrics import change_impact, conformance, effort, functional, perf, rework, static_quality
+from .metrics import (change_impact, conformance, effort, functional, perf,
+                      resilience, rework, static_quality)
 from .prompt import build_prompt
 from .schema import (Budget, BudgetKpi, Cell, Conformance, EnvInfo, Functional,
-                     PerformanceKpi, QualityKpi, RunRecord, StaticQuality, T2Info, TimeKpi)
+                     PerformanceKpi, QualityKpi, Resilience, RunRecord, StaticQuality,
+                     T2Info, TimeKpi)
 from .workspace import Workspace, provision, reset_infra, start_infra, teardown
 
 
@@ -51,17 +53,19 @@ def run_cell(cell: CellSpec) -> RunRecord:
         build_boot.stop(w)
         reset_infra(w)
         builds = build_boot.final_build(w, w.root / "logs" / "build.log")
-        boots, flaky, app_pid = (False, False, None)
+        boots, flaky, app_pids = (False, False, [])
         if builds:
-            boots, flaky, app_pid = build_boot.boot(w, w.root / "logs" / "boot.log")
+            boots, flaky, app_pids = build_boot.boot(w, w.root / "logs" / "boot.log")
 
         func = {"acceptance_passed": None, "acceptance_total": None,
                 "acceptance_pass_rate": None, "acceptance_failed": None,
                 "variant_pass_rate": None}
         perf_out: dict = {"measured": False, "skip_reason": "app never booted"}
+        resil = {"measured": False, "skip_reason": "app never booted", "scenarios": []}
         if boots:
             func = functional.grade(w)
-            perf_out = perf.measure(w, app_pid)
+            perf_out = perf.measure(w, app_pids)
+            resil = resilience.measure(w)   # micro-only chaos; no-op for single
         strict = build_boot.strict_confinement_probe(w, w.root / "logs" / "boot.log") \
             if boots else None
 
@@ -79,7 +83,8 @@ def run_cell(cell: CellSpec) -> RunRecord:
         record = RunRecord(
             run_id=w.run_id,
             cell=Cell(domain=cell.domain, arm=cell.arm, model=cell.model,
-                      model_id=model_cfg["model_id"], task=cell.task, rep=cell.rep),
+                      model_id=model_cfg["model_id"], task=cell.task,
+                      topology=cell.topology, rep=cell.rep),
             env=EnvInfo(
                 harness_git_sha=harness_git_sha(),
                 agent_cli=model_cfg["adapter"],
@@ -126,6 +131,8 @@ def run_cell(cell: CellSpec) -> RunRecord:
                                             if k in StaticQuality.model_fields}),
             conformance=Conformance(**{k: v for k, v in conf.items()
                                        if k in Conformance.model_fields}),
+            resilience=Resilience(**{k: v for k, v in resil.items()
+                                     if k in Resilience.model_fields}),
             t2=T2Info(**ci) if cell.task == "t2" else None,
             notes=notes,
         )
