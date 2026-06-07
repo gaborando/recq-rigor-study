@@ -80,7 +80,7 @@ def main() -> None:
     df.to_csv(OUT, index=False)
     print(f"{len(df)} runs -> {OUT}")
     if len(df):
-        print(df.groupby(["domain", "arm", "task"])[
+        print(df.groupby(["domain", "arm", "model", "task"])[
             ["acceptance_pass_rate", "cost_usd", "wall_seconds"]].mean(numeric_only=True))
 
 

@@ -1,0 +1,5 @@
+--- boot attempt 1 ---
+waiting for http://localhost:50123/actuator/health ...
+app is UP (pid 61181)
+
+
