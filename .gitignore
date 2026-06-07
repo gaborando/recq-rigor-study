@@ -22,3 +22,4 @@ analysis/results.csv
 # run records ARE data and are committed — but not their build leftovers
 runs/**/workspace/target/
 runs/**/.m2/
+runs/*/workspace/.git/
