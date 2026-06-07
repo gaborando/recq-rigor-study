@@ -1,0 +1,190 @@
+{
+  "run_id": "order-inventory__arm_a_evento__claude-sonnet__t1__rep1__20260607T140530Z",
+  "schema_version": 1,
+  "cell": {
+    "domain": "order-inventory",
+    "arm": "arm_a_evento",
+    "model": "claude-sonnet",
+    "model_id": "claude-sonnet-4-6",
+    "task": "t1",
+    "rep": 1,
+    "seed": null
+  },
+  "env": {
+    "harness_git_sha": "745e8973a29e1075f49b0fbb3ae2429ef742ad11",
+    "agent_cli": "claude_code",
+    "agent_cli_version": "2.1.166 (Claude Code)",
+    "docker_image_digests": {
+      "postgres": "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae",
+      "evento_server": "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4",
+      "build_image": "maven:3.9-eclipse-temurin-21",
+      "k6": "grafana/k6:2.0.0"
+    },
+    "tool_versions": {
+      "python": "3.14.0"
+    },
+    "host": "Darwin arm64"
+  },
+  "budget": {
+    "max_wall_minutes": 30,
+    "max_turns": 60,
+    "max_tokens": 1500000,
+    "exhausted": false,
+    "exhausted_reason": null
+  },
+  "time": {
+    "started_at": "2026-06-07T14:05:31.168762Z",
+    "finished_at": "2026-06-07T14:30:33.523034Z",
+    "wall_seconds": 1236.1594379160015,
+    "active_agent_seconds": 973.916,
+    "seconds_to_first_green_build": 843.5171940326691,
+    "seconds_to_all_green": 942.9676489830017
+  },
+  "budget_spent": {
+    "tokens_in": 33,
+    "tokens_out": 67737,
+    "cache_tokens": 3208940,
+    "turns": 96,
+    "tool_invocations": 95,
+    "cost_usd": 2.68802815,
+    "cost_source": "reported"
+  },
+  "quality_rework": {
+    "iterations_total": 64,
+    "iterations_after_first_test_run": 1,
+    "loc_churned_after_first_test_run": 45,
+    "files_touched_in_rework": 1,
+    "rework_ratio": 0.0259,
+    "tests_failing_at_end": 0
+  },
+  "performance": {
+    "measured": true,
+    "skip_reason": null,
+    "endpoints": [
+      {
+        "endpoint": "place_order",
+        "p50_ms": 4.54,
+        "p95_ms": 11.837299999999992,
+        "p99_ms": 11.837299999999992,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_order",
+        "p50_ms": 2.244,
+        "p95_ms": 6.035499999999999,
+        "p99_ms": 6.035499999999999,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_product",
+        "p50_ms": 2.065,
+        "p95_ms": 5.787,
+        "p99_ms": 5.787,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_stats",
+        "p50_ms": 4.317,
+        "p95_ms": 9.189799999999993,
+        "p99_ms": 9.189799999999993,
+        "rps": 0.0,
+        "error_rate": 0.0
+      }
+    ],
+    "overall_p95_ms": 10.556099999999997,
+    "overall_rps": 162.20672341606,
+    "overall_error_rate": 0.257741273100616,
+    "mem_app_rss_mb_peak": 407.5,
+    "mem_app_rss_mb_avg": 334.6,
+    "mem_jvm_heap_mb": 107.5,
+    "mem_total_stack_mb": 1313.6
+  },
+  "functional": {
+    "builds_cleanly": true,
+    "boots_cleanly": true,
+    "boot_flaky": false,
+    "acceptance_pass_rate": 1.0,
+    "acceptance_passed": 16,
+    "acceptance_total": 16,
+    "variant_pass_rate": 1.0
+  },
+  "static_quality": {
+    "measured": true,
+    "loc_java": 1723,
+    "files_java": 65,
+    "classes": 65,
+    "cbo": {
+      "mean": 4.0,
+      "max": 14.0
+    },
+    "wmc": {
+      "mean": 7.43,
+      "max": 26.0
+    },
+    "lcom": {
+      "mean": 11.46,
+      "max": 91.0
+    },
+    "rfc": {
+      "mean": 4.55,
+      "max": 24.0
+    },
+    "dit": {
+      "mean": 1.52,
+      "max": 2.0
+    },
+    "pmd_violations": 63,
+    "pmd_violations_per_kloc": 36.56
+  },
+  "conformance": {
+    "measured": true,
+    "rules": [
+      {
+        "rule": "command-side-independent-of-query-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "query-side-never-reaches-command-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "web-layer-free-of-persistence",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "no-cycles-between-layers",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "evento-read-side-never-sends-commands",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "evento-aggregate-independent-of-query-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      }
+    ],
+    "total_violations": 0,
+    "inconclusive_rules": 0,
+    "strict_confinement_would_fail": false
+  },
+  "t2": null,
+  "notes": [
+    "conformance re-measured after harness scope-check fix (commit follows); artifact unchanged"
+  ]
+}

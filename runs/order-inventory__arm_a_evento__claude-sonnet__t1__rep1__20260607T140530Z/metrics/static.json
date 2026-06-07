@@ -1,0 +1,28 @@
+{
+  "measured": true,
+  "loc_java": 1723,
+  "files_java": 65,
+  "classes": 65,
+  "cbo": {
+    "mean": 4.0,
+    "max": 14.0
+  },
+  "wmc": {
+    "mean": 7.43,
+    "max": 26.0
+  },
+  "lcom": {
+    "mean": 11.46,
+    "max": 91.0
+  },
+  "rfc": {
+    "mean": 4.55,
+    "max": 24.0
+  },
+  "dit": {
+    "mean": 1.52,
+    "max": 2.0
+  },
+  "pmd_violations": 63,
+  "pmd_violations_per_kloc": 36.56
+}

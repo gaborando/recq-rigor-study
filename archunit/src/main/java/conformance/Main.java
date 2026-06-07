@@ -131,8 +131,8 @@ public final class Main {
         } else {
             String pkg = scope.toString();
             scopeNonEmpty = classes.stream().anyMatch(
-                    pkg.endsWith(".") ? c -> c.getName().startsWith(pkg)
-                                      : resideInAPackage(pkg)::test);
+                    pkg.startsWith("..") ? resideInAPackage(pkg)::test
+                                         : c -> c.getName().startsWith(pkg));
         }
         if (!scopeNonEmpty) {
             return new RuleOutcome(name, "inconclusive", 0,

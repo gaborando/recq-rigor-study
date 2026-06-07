@@ -1,0 +1,221 @@
+openapi: 3.0.3
+info:
+  title: Order & Inventory System
+  version: "1.0"
+  description: >
+    Normative REST contract. Behavior is specified in SPEC.md; the acceptance
+    test suite is the requirement. Reads may be eventually consistent with a
+    10-second convergence deadline.
+
+paths:
+  /products:
+    post:
+      summary: Create a product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, unitPrice, stock]
+              properties:
+                name: { type: string, minLength: 1 }
+                unitPrice: { type: integer, minimum: 1, description: cents }
+                stock: { type: integer, minimum: 0 }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Product" }
+        "400": { description: Malformed }
+
+  /products/{id}:
+    get:
+      summary: Get product view
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Product" }
+        "404": { description: Unknown product }
+
+  /products/{id}/restock:
+    post:
+      summary: Add stock. Concurrent restocks must all be applied (no lost update).
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [units]
+              properties:
+                units: { type: integer, minimum: 1 }
+      responses:
+        "202": { description: Accepted }
+        "400": { description: Malformed / units < 1 }
+        "404": { description: Unknown product }
+
+  /customers:
+    post:
+      summary: Create a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, balance]
+              properties:
+                name: { type: string, minLength: 1 }
+                balance: { type: integer, minimum: 0, description: cents }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Customer" }
+        "400": { description: Malformed }
+
+  /customers/{id}:
+    get:
+      summary: Get customer view
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Customer" }
+        "404": { description: Unknown customer }
+
+  /customers/{id}/deposit:
+    post:
+      summary: Add funds. Concurrent deposits must all be applied (no lost update).
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount]
+              properties:
+                amount: { type: integer, minimum: 1 }
+      responses:
+        "202": { description: Accepted }
+        "400": { description: Malformed / amount < 1 }
+        "404": { description: Unknown customer }
+
+  /customers/{id}/notifications:
+    get:
+      summary: Notifications for the customer — exactly one per order decision.
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Notification" }
+        "404": { description: Unknown customer }
+
+  /orders:
+    post:
+      summary: >
+        Place an order. Client supplies orderId (UUID); the operation is
+        idempotent on orderId under any concurrency — at most one order,
+        one charge, one notification. Processing may be asynchronous.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [orderId, customerId, productId, quantity]
+              properties:
+                orderId: { type: string, format: uuid }
+                customerId: { type: string }
+                productId: { type: string }
+                quantity: { type: integer, minimum: 1 }
+      responses:
+        "202":
+          description: Accepted (also returned for an idempotent replay; 200 acceptable for replays)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Order" }
+        "200":
+          description: Idempotent replay — current order state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Order" }
+        "400": { description: Malformed / quantity < 1 / unknown references (REJECTED outcome also acceptable) }
+
+  /orders/{id}:
+    get:
+      summary: Get order view. Status never regresses.
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Order" }
+        "404": { description: Unknown order (allowed only before the write converges) }
+
+  /stats/orders:
+    get:
+      summary: Aggregate statistics over all orders.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [confirmed, rejected, revenue]
+                properties:
+                  confirmed: { type: integer }
+                  rejected: { type: integer }
+                  revenue: { type: integer, description: sum of totals of confirmed orders, cents }
+
+components:
+  schemas:
+    Product:
+      type: object
+      required: [id, name, unitPrice, stock]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        unitPrice: { type: integer }
+        stock: { type: integer, minimum: 0 }
+    Customer:
+      type: object
+      required: [id, name, balance]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        balance: { type: integer, minimum: 0 }
+    Order:
+      type: object
+      required: [orderId, customerId, productId, quantity, status]
+      properties:
+        orderId: { type: string }
+        customerId: { type: string }
+        productId: { type: string }
+        quantity: { type: integer }
+        status: { type: string, enum: [PENDING, CONFIRMED, REJECTED] }
+        reason: { type: string, enum: [OUT_OF_STOCK, INSUFFICIENT_FUNDS], description: present iff REJECTED }
+        total: { type: integer, description: present iff CONFIRMED }
+    Notification:
+      type: object
+      required: [orderId, status]
+      properties:
+        orderId: { type: string }
+        status: { type: string, enum: [CONFIRMED, REJECTED] }
+        reason: { type: string }

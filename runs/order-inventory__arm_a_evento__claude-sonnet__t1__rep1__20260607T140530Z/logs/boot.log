@@ -1,0 +1,10 @@
+--- boot attempt 1 ---
+waiting for http://localhost:59356/actuator/health ...
+app is UP (pid 58068)
+
+
+--- strictConfinement probe (exit 0) ---
+waiting for http://localhost:59356/actuator/health ...
+app is UP (pid 58310)
+
+
