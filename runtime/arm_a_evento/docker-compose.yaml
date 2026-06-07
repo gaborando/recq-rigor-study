@@ -1,8 +1,22 @@
-# Runtime dependencies for the Evento arm: Postgres + Evento Server.
+# Runtime dependencies for the Evento arm: Evento Server (+ its Postgres) and
+# an app-facing Postgres (parity with the other arms, for read models).
 # Digest-pinned (config/versions.lock.yaml). No host ports here — the harness
 # starts each run as its own compose project (-p run_<id>) and publishes
 # ephemeral ports it records in run.json.
 services:
+  appdb:
+    image: postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d app"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "5432"            # ephemeral host port
+
   database:
     image: postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae
     environment:
