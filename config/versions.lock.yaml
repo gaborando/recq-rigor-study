@@ -1,0 +1,53 @@
+# Every external dependency pin for the study.
+# Rule: nothing in the harness, skeletons, or runtime references a floating
+# tag/version — everything resolves through this file.
+# resolved_at: dates when the pin was recorded.
+
+docker_images:
+  postgres:
+    ref: "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae"
+    resolved_at: "2026-06-07"
+  evento_server:
+    ref: "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4"
+    resolved_at: "2026-06-07"
+  build_image:
+    # JDK + Maven used to build/boot generated apps inside run containers
+    ref: "maven:3.9-eclipse-temurin-21"   # TODO: pin digest at first pilot pull
+    resolved_at: null
+  k6:
+    ref: "grafana/k6:0.57.0"              # TODO: pin digest at first pilot pull
+    resolved_at: null
+
+frameworks:
+  evento_bundle: "com.eventoframework:evento-bundle:2.1.0"
+  axon_spring_boot_starter: "org.axonframework:axon-spring-boot-starter:RESOLVE_AT_SKELETON_BUILD"
+  spring_boot: "RESOLVE_AT_SKELETON_BUILD"   # identical across all three arms
+  archunit: "com.tngtech.archunit:archunit-junit5:RESOLVE_AT_SKELETON_BUILD"
+
+static_tools:
+  ck:
+    version: "0.7.0"
+    url: "https://repo1.maven.org/maven2/com/github/mauricioaniche/ck/0.7.0/ck-0.7.0-jar-with-dependencies.jar"
+    sha256: "RECORD_ON_FIRST_FETCH"   # tools/fetch_tools.sh --update-lock
+  pmd:
+    version: "RESOLVE_AT_FETCH"
+    url: null
+    sha256: "RECORD_ON_FIRST_FETCH"
+  cloc:
+    version: "RESOLVE_AT_FETCH"
+    url: null
+    sha256: "RECORD_ON_FIRST_FETCH"
+
+python:
+  version: "3.12"
+  manager: "uv"      # exact dep pins live in uv.lock
+
+agent_clis:
+  claude_code:
+    version: "RECORD_AT_PILOT"    # `claude --version` recorded into each run.json
+  codex:
+    version: "RECORD_AT_SCALEOUT"
+  gemini:
+    version: "RECORD_AT_SCALEOUT"
+  opencode:
+    version: "RECORD_AT_SCALEOUT"

@@ -1,0 +1,34 @@
+# Runtime dependencies for the Evento arm: Postgres + Evento Server.
+# Digest-pinned (config/versions.lock.yaml). No host ports here — the harness
+# starts each run as its own compose project (-p run_<id>) and publishes
+# ephemeral ports it records in run.json.
+services:
+  database:
+    image: postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: evento
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d evento"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "5432"            # ephemeral host port
+
+  evento-server:
+    image: eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      evento_cluster_name: evento-server
+      evento_performance_capture_rate: "1"
+      evento_telemetry_ttl: "365"
+      evento_security_signing_key: RECQ_RIGOR_STUDY_SIGNING_SEED
+      spring_datasource_url: jdbc:postgresql://database:5432/evento
+      spring_datasource_username: postgres
+      spring_datasource_password: secret
+    ports:
+      - "3000"            # HTTP / admin / catalog + flows API (ephemeral host port)
+      - "3030"            # bundle transport (ephemeral host port)

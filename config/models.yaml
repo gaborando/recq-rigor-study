@@ -1,0 +1,40 @@
+# Model registry: which LLM developers exist and how to price them.
+# `price_per_mtok` is used by harness/metrics/effort.py when the CLI does not
+# itself report cost; run.json always records cost_source: reported|computed|estimated.
+
+price_table_date: "2026-06-07"
+
+models:
+  claude-sonnet:
+    adapter: claude_code               # harness/agents/claude_code.py
+    model_id: "claude-sonnet-4-6"
+    status: active
+    price_per_mtok:
+      input: 3.00
+      output: 15.00
+      cache_read: 0.30
+
+  openai-gpt:
+    adapter: codex
+    model_id: "PIN_AT_SCALEOUT"        # pin exact gpt-* codex model at scale-out
+    status: pending
+    price_per_mtok:
+      input: null
+      output: null
+
+  gemini:
+    adapter: gemini
+    model_id: "PIN_AT_SCALEOUT"
+    status: pending
+    price_per_mtok:
+      input: null
+      output: null
+
+  open-weights:
+    adapter: opencode
+    model_id: "PIN_AT_SCALEOUT"        # e.g. a Qwen-Coder served at a recorded provider
+    endpoint_env: "OPENWEIGHTS_BASE_URL"
+    status: pending
+    price_per_mtok:
+      input: null
+      output: null

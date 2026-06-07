@@ -1,0 +1,24 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# fetched pinned tools (re-fetchable via tools/fetch_tools.sh)
+tools/*.jar
+tools/pmd-bin*/
+tools/cloc*
+
+# build artifacts
+target/
+*.class
+
+# analysis outputs are regenerable
+analysis/figures/
+analysis/tables/
+analysis/results.csv
+
+# run records ARE data and are committed — but not their build leftovers
+runs/**/workspace/target/
+runs/**/.m2/

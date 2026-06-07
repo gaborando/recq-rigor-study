@@ -1,0 +1,45 @@
+# Arm registry: the three technology constraints under test.
+# constraint_clause is the ONLY prose that differs between arms in the agent prompt.
+
+arms:
+  arm_a_evento:
+    name: "Evento (RECQ)"
+    skeleton: skeletons/arm_a_evento
+    docs_pack: docs_packs/arm_a_evento
+    runtime_compose: runtime/arm_a_evento/docker-compose.yaml
+    archunit_arm: ARM_A
+    constraint_clause: >
+      You MUST implement the system using the Evento Framework
+      (com.eventoframework:evento-bundle — already wired in the skeleton).
+      Model the write side with @Aggregate components (commands -> events),
+      the read side with @Projector + @Projection components, cross-aggregate
+      processes with @Saga components, and external/stateless work with
+      @Service or @Observer components. All inter-component communication goes
+      through the Evento gateways. Documentation is in ./docs.
+
+  arm_b_spring:
+    name: "Plain Spring Boot"
+    skeleton: skeletons/arm_b_spring
+    docs_pack: docs_packs/arm_b_spring
+    runtime_compose: runtime/arm_b_spring/docker-compose.yaml
+    archunit_arm: ARM_B
+    constraint_clause: >
+      You MUST implement the system in plain Spring Boot. You may use Spring
+      Web, Spring Data JPA, and the JDK; you MUST NOT add any CQRS, event
+      sourcing, messaging, or actor framework dependency. Any consistency,
+      idempotency, or concurrency handling the tests require must be
+      implemented by you. Documentation is in ./docs.
+
+  arm_c_axon:
+    name: "Axon Framework"
+    skeleton: skeletons/arm_c_axon
+    docs_pack: docs_packs/arm_c_axon
+    runtime_compose: runtime/arm_c_axon/docker-compose.yaml
+    archunit_arm: ARM_C
+    constraint_clause: >
+      You MUST implement the system using Axon Framework
+      (axon-spring-boot-starter with the embedded JPA event store — already
+      wired in the skeleton). Model the write side with @Aggregate classes
+      (commands -> events), the read side with @EventHandler projections, and
+      cross-aggregate processes with sagas or event processors.
+      Documentation is in ./docs.
