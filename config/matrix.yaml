@@ -27,6 +27,13 @@ profiles:
       - { domain: order-inventory, arm: arm_c_axon,   model: claude-sonnet, task: t1 }
       - { domain: order-inventory, arm: arm_b_spring, model: claude-sonnet, task: t2 }
 
+  # $0 plumbing validation: null agent on the empty micro reactor.
+  micro-dry:
+    reps: 1
+    budget: { max_wall_minutes: 30, max_turns: 60, max_tokens: 1_500_000 }
+    cells:
+      - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t1, topology: micro }
+
   # Micro-topology pilot: independent multi-service delivery, 45-60min budgets.
   micro-pilot:
     reps: 1

@@ -139,7 +139,9 @@ def provision(cell: CellSpec) -> Workspace:
 
     docs_src = REPO / arm["docs_pack"]
     if docs_src.exists():
-        shutil.copytree(docs_src, ws / "docs", dirs_exist_ok=True)
+        # MICRO.md is multi-service guidance — only ship it for micro topology
+        ignore = None if cell.topology == "micro" else shutil.ignore_patterns("MICRO.md")
+        shutil.copytree(docs_src, ws / "docs", dirs_exist_ok=True, ignore=ignore)
 
     # 3) per-iteration auto-commit hook for the agent CLI
     claude_dir = ws / ".claude"

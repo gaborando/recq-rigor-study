@@ -1,0 +1,46 @@
+{
+  "measured": true,
+  "skip_reason": null,
+  "endpoints": [
+    {
+      "endpoint": "place_order",
+      "p50_ms": 2.927,
+      "p95_ms": 7.298499999999999,
+      "p99_ms": 7.298499999999999,
+      "rps": 0.0,
+      "error_rate": 0.0
+    },
+    {
+      "endpoint": "get_order",
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0,
+      "rps": 0.0,
+      "error_rate": 0.0
+    },
+    {
+      "endpoint": "get_product",
+      "p50_ms": 3.011,
+      "p95_ms": 7.538899999999997,
+      "p99_ms": 7.538899999999997,
+      "rps": 0.0,
+      "error_rate": 0.0
+    },
+    {
+      "endpoint": "get_stats",
+      "p50_ms": 3.018,
+      "p95_ms": 7.539499999999998,
+      "p99_ms": 7.539499999999998,
+      "rps": 0.0,
+      "error_rate": 0.0
+    }
+  ],
+  "k6_wall_seconds": 150.7,
+  "overall_p95_ms": 7.417449999999999,
+  "overall_rps": 160.5474425222896,
+  "overall_error_rate": 1,
+  "mem_app_rss_mb_peak": 982.7,
+  "mem_app_rss_mb_avg": 301.2,
+  "mem_jvm_heap_mb": 40.1,
+  "mem_total_stack_mb": 1101.7
+}
