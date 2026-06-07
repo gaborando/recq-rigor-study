@@ -5,6 +5,12 @@
 price_table_date: "2026-06-07"
 
 models:
+  null-agent:                          # $0 dry-run: grades the bare skeleton
+    adapter: "null"
+    model_id: "none"
+    status: active
+    price_per_mtok: { input: 0, output: 0 }
+
   claude-sonnet:
     adapter: claude_code               # harness/agents/claude_code.py
     model_id: "claude-sonnet-4-6"

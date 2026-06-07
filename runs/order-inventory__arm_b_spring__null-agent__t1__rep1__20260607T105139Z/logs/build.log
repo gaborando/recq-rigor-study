@@ -1,0 +1,38 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< com.study:app >----------------------------
+[INFO] Building order-inventory (plain Spring arm) 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ app ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ app ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ app ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_b_spring__null-agent__t1__rep1__20260607T105139Z/workspace/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ app ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ app ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ app ---
+[INFO] Building jar: /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_b_spring__null-agent__t1__rep1__20260607T105139Z/workspace/target/app-1.0.0.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ app ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_b_spring__null-agent__t1__rep1__20260607T105139Z/workspace/target/app-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_b_spring__null-agent__t1__rep1__20260607T105139Z/workspace/target/app-1.0.0.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.722 s
+[INFO] Finished at: 2026-06-07T12:51:49+02:00
+[INFO] ------------------------------------------------------------------------
+
+--- stderr ---

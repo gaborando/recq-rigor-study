@@ -14,10 +14,10 @@ LOCK=config/versions.lock.yaml
 UPDATE_LOCK="${1:-}"
 
 need() { command -v "$1" >/dev/null || { echo "missing: $1" >&2; exit 1; }; }
-need curl; need python3; need shasum
+need curl; need uv; need shasum
 
 yq() { # tiny yaml getter: yq <dotted.path>
-  python3 - "$1" <<'EOF'
+  uv run --quiet python - "$1" <<'EOF'
 import sys, yaml
 path = sys.argv[1].split('.')
 with open('config/versions.lock.yaml') as f:
@@ -39,7 +39,7 @@ fetch() { # fetch <name> <url> <dest> <lockpath-for-sha>
   local sha; sha=$(shasum -a 256 "$dest" | cut -d' ' -f1)
   local expected; expected=$(yq "$lockpath")
   if [[ "$UPDATE_LOCK" == "--update-lock" ]]; then
-    python3 - "$lockpath" "$sha" <<'EOF'
+    uv run --quiet python - "$lockpath" "$sha" <<'EOF'
 import sys, yaml
 path, sha = sys.argv[1].split('.'), sys.argv[2]
 with open('config/versions.lock.yaml') as f:

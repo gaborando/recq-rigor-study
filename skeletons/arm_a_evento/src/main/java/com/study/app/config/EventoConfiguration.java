@@ -27,11 +27,13 @@ public class EventoConfiguration {
             @Value("${evento.server.port}") int port,
             @Value("${evento.bundle.id}") String bundleId,
             @Value("${evento.bundle.version}") long version,
+            @Value("${evento.strict.confinement:${EVENTO_STRICT:false}}") boolean strictConfinement,
             BeanFactory factory) throws Exception {
         return EventoBundle.Builder.builder()
                 .setBasePackage(App.class.getPackage())
                 .setBundleId(bundleId)
                 .setBundleVersion(version)
+                .setStrictConfinement(strictConfinement)
                 .setEventoServerMessageBusConfiguration(new EventoServerMessageBusConfiguration(
                         new ClusterNodeAddress(host, port)))
                 .setInjector(factory::getBean)
