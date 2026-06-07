@@ -1,0 +1,151 @@
+{
+  "run_id": "order-inventory__arm_b_spring__null-agent__t1__rep1__20260607T105139Z",
+  "schema_version": 1,
+  "cell": {
+    "domain": "order-inventory",
+    "arm": "arm_b_spring",
+    "model": "null-agent",
+    "model_id": "none",
+    "task": "t1",
+    "rep": 1,
+    "seed": null
+  },
+  "env": {
+    "harness_git_sha": "3c13f19fea3293d09ddfaebce71834432f5d448f",
+    "agent_cli": "null",
+    "agent_cli_version": "null",
+    "docker_image_digests": {
+      "postgres": "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae",
+      "evento_server": "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4",
+      "build_image": "maven:3.9-eclipse-temurin-21",
+      "k6": "grafana/k6:2.0.0"
+    },
+    "tool_versions": {
+      "python": "3.14.0"
+    },
+    "host": "Darwin arm64"
+  },
+  "budget": {
+    "max_wall_minutes": 45,
+    "max_turns": 100,
+    "max_tokens": 3000000,
+    "exhausted": false,
+    "exhausted_reason": null
+  },
+  "time": {
+    "started_at": "2026-06-07T10:51:39.412437Z",
+    "finished_at": "2026-06-07T10:54:29.738760Z",
+    "wall_seconds": 0.0,
+    "active_agent_seconds": null,
+    "seconds_to_first_green_build": null,
+    "seconds_to_all_green": null
+  },
+  "budget_spent": {
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "cache_tokens": null,
+    "turns": 0,
+    "tool_invocations": 0,
+    "cost_usd": 0.0,
+    "cost_source": "reported"
+  },
+  "quality_rework": {
+    "iterations_total": 0,
+    "iterations_after_first_test_run": null,
+    "loc_churned_after_first_test_run": null,
+    "files_touched_in_rework": null,
+    "rework_ratio": null,
+    "tests_failing_at_end": 15
+  },
+  "performance": {
+    "measured": true,
+    "skip_reason": null,
+    "endpoints": [
+      {
+        "endpoint": "place_order",
+        "p50_ms": 2.554,
+        "p95_ms": 6.776899999999998,
+        "p99_ms": 6.776899999999998,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_order",
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_product",
+        "p50_ms": 2.581,
+        "p95_ms": 6.842349999999995,
+        "p99_ms": 6.842349999999995,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_stats",
+        "p50_ms": 2.591,
+        "p95_ms": 6.812499999999999,
+        "p99_ms": 6.812499999999999,
+        "rps": 0.0,
+        "error_rate": 0.0
+      }
+    ],
+    "overall_p95_ms": 6.918749999999998,
+    "overall_rps": 163.42327721574605,
+    "overall_error_rate": 1.0,
+    "mem_app_rss_mb_peak": 271.0,
+    "mem_app_rss_mb_avg": 165.7,
+    "mem_jvm_heap_mb": 70.0,
+    "mem_total_stack_mb": 311.0
+  },
+  "functional": {
+    "builds_cleanly": true,
+    "boots_cleanly": true,
+    "boot_flaky": false,
+    "acceptance_pass_rate": 0.0625,
+    "acceptance_passed": 1,
+    "acceptance_total": 16,
+    "variant_pass_rate": 0.0
+  },
+  "static_quality": {
+    "measured": true,
+    "loc_java": 9,
+    "files_java": 1,
+    "classes": 1,
+    "cbo": {
+      "mean": 2.0,
+      "max": 2.0
+    },
+    "wmc": {
+      "mean": 1.0,
+      "max": 1.0
+    },
+    "lcom": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "rfc": {
+      "mean": 1.0,
+      "max": 1.0
+    },
+    "dit": {
+      "mean": 1.0,
+      "max": 1.0
+    },
+    "pmd_violations": 0,
+    "pmd_violations_per_kloc": 0.0
+  },
+  "conformance": {
+    "measured": false,
+    "rules": [],
+    "total_violations": null,
+    "inconclusive_rules": null,
+    "strict_confinement_would_fail": null
+  },
+  "t2": null,
+  "notes": []
+}

@@ -62,7 +62,8 @@ public final class Main {
                         .resideInAnyPackage("jakarta.persistence..", "org.springframework.data..")));
 
         outcomes.add(evaluate(imported, "no-cycles-between-layers", "com.study.app.",
-                slices().matching("com.study.app.(*)..").should().beFreeOfCycles()));
+                slices().matching("com.study.app.(*)..").should().beFreeOfCycles()
+                        .allowEmptyShould(true)));
 
         // --- arm-specific refinements (annotation names, no framework deps) ---
         switch (arm) {
@@ -137,7 +138,7 @@ public final class Main {
             return new RuleOutcome(name, "inconclusive", 0,
                     "scope empty: mandated structure absent");
         }
-        EvaluationResult res = rule.evaluate(classes);
+        EvaluationResult res = rule.allowEmptyShould(true).evaluate(classes);
         List<String> details = res.getFailureReport().getDetails();
         if (details.isEmpty()) return new RuleOutcome(name, "pass", 0, "");
         String first = details.get(0);

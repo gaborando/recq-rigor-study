@@ -136,3 +136,13 @@ def run_cell(cell: CellSpec) -> RunRecord:
     finally:
         build_boot.stop(w)
         teardown(w)
+        # preserve the per-iteration history as a single replayable bundle so
+        # the outer repo can track it (an inner .git would be an opaque gitlink)
+        inner_git = w.dir / ".git"
+        if inner_git.exists():
+            import shutil as _shutil
+            import subprocess as _sp
+            _sp.run(["git", "bundle", "create",
+                     str(w.root / "workspace-history.bundle"), "--all"],
+                    cwd=w.dir, check=False, capture_output=True)
+            _shutil.rmtree(inner_git, ignore_errors=True)
