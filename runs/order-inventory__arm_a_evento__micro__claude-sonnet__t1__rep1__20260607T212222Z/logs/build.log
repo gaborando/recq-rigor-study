@@ -1,0 +1,163 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] arm_a_evento_micro                                                 [pom]
+[INFO] shared payloads                                                    [jar]
+[INFO] edge service                                                       [jar]
+[INFO] orders service                                                     [jar]
+[INFO] inventory service                                                  [jar]
+[INFO] customers service                                                  [jar]
+[INFO] 
+[INFO] --------------------< com.study:arm_a_evento_micro >--------------------
+[INFO] Building arm_a_evento_micro 1.0.0                                  [1/6]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------------< com.study:api >----------------------------
+[INFO] Building shared payloads 1.0.0                                     [2/6]
+[INFO]   from api/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/api/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/api/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/api/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ api ---
+[INFO] 
+[INFO] ---------------------------< com.study:edge >---------------------------
+[INFO] Building edge service 1.0.0                                        [3/6]
+[INFO]   from edge/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ edge ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ edge ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ edge ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/edge/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ edge ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ edge ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ edge ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ edge ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/edge/target/edge-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/edge/target/edge-1.0.0.jar.original
+[INFO] 
+[INFO] --------------------------< com.study:orders >--------------------------
+[INFO] Building orders service 1.0.0                                      [4/6]
+[INFO]   from orders/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ orders ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ orders ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ orders ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/orders/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ orders ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ orders ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ orders ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ orders ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/orders/target/orders-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/orders/target/orders-1.0.0.jar.original
+[INFO] 
+[INFO] ------------------------< com.study:inventory >-------------------------
+[INFO] Building inventory service 1.0.0                                   [5/6]
+[INFO]   from inventory/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ inventory ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ inventory ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ inventory ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/inventory/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ inventory ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ inventory ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ inventory ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ inventory ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/inventory/target/inventory-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/inventory/target/inventory-1.0.0.jar.original
+[INFO] 
+[INFO] ------------------------< com.study:customers >-------------------------
+[INFO] Building customers service 1.0.0                                   [6/6]
+[INFO]   from customers/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ customers ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ customers ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ customers ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/customers/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ customers ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ customers ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ customers ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ customers ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/customers/target/customers-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T212222Z/workspace/customers/target/customers-1.0.0.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for arm_a_evento_micro 1.0.0:
+[INFO] 
+[INFO] arm_a_evento_micro ................................. SUCCESS [  0.002 s]
+[INFO] shared payloads .................................... SUCCESS [  0.729 s]
+[INFO] edge service ....................................... SUCCESS [  0.339 s]
+[INFO] orders service ..................................... SUCCESS [  0.152 s]
+[INFO] inventory service .................................. SUCCESS [  0.089 s]
+[INFO] customers service .................................. SUCCESS [  0.071 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.625 s
+[INFO] Finished at: 2026-06-07T23:46:26+02:00
+[INFO] ------------------------------------------------------------------------
+
+--- stderr ---
