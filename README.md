@@ -8,7 +8,7 @@ behavior of the same system built under three technology constraints:
 |-----|-----------|
 | `arm_a_evento` | [Evento Framework](https://github.com/EventoFramework/evento-framework) (RECQ architecture — enforced component model) |
 | `arm_b_spring` | Plain Spring Boot — no CQRS/ES framework |
-| `arm_c_axon`   | [Axon Framework](https://www.axoniq.io/) (CQRS/ES, embedded JPA event store) |
+| `arm_c_axon`   | [Axon Framework](https://www.axoniq.io/) (CQRS/ES, distributed via Axon Server) |
 
 This repository is the research artifact for **Paper B** of the RECQ/Evento publication
 series. Everything needed to replicate the study is here: the specs, the frozen
@@ -67,9 +67,11 @@ acceptance/    the frozen TDD suites (pytest + httpx) — visible to the agent
 variant/       anti-gaming re-grade suites (same scenarios, fresh data) — never enter a workspace
 perf/          fixed k6 load scripts per domain
 docs_packs/    per-arm in-context documentation, token-budget-equalized (see SOURCES.md)
-skeletons/     per-arm minimal compiling Maven projects (root package com.study.app)
+skeletons/     per-(arm,domain) micro reactors: a parent Maven build + edge gateway
+               + one module per stateful service (root package com.study.app)
 archunit/      conformance rules run against generated classes
-runtime/       per-arm pinned docker-compose runtime dependencies
+runtime/       per-(arm,domain) pinned docker-compose: a Postgres per service
+               (+ Evento server / Axon Server where the arm needs a broker)
 harness/       Python orchestrator: workspace, prompt, budgets, agents, metrics, persistence
 analysis/      aggregation -> Mann-Whitney U + Cliff's delta -> figures + LaTeX tables
 runs/          persisted run records (the raw data of the paper)
