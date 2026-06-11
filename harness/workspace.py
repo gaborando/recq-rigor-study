@@ -11,6 +11,7 @@ import json
 import shutil
 import socket
 import subprocess
+import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -158,14 +159,33 @@ def provision(cell: CellSpec) -> Workspace:
     return w
 
 
+def _wait_tcp(port: int, timeout_s: int = 90, grace_s: float = 8.0) -> None:
+    """Block until a TCP connect to localhost:port succeeds, then a grace pause.
+    The evento-server / Axon Server containers accept TCP before they are ready
+    to complete bundle registration; the grace reduces the registration race
+    that otherwise relies on the boot-retry layer."""
+    end = time.monotonic() + timeout_s
+    while time.monotonic() < end:
+        try:
+            with socket.create_connection(("localhost", port), timeout=3):
+                time.sleep(grace_s)
+                return
+        except OSError:
+            time.sleep(1)
+
+
 def _broker_env(w: Workspace, env: dict) -> None:
     if w.cell.arm == "arm_a_evento":
         env["EVENTO_HOST"] = "localhost"
-        env["EVENTO_PORT"] = str(w.service_port("evento-server", 3030))
+        transport = w.service_port("evento-server", 3030)
+        env["EVENTO_PORT"] = str(transport)
         env["EVENTO_HTTP_PORT"] = str(w.service_port("evento-server", 3000))
+        _wait_tcp(transport)                      # let the server become registration-ready
     elif w.cell.arm == "arm_c_axon" and w.cell.topology == "micro":
         env["AXON_HOST"] = "localhost"
-        env["AXON_PORT"] = str(w.service_port("axonserver", 8124))
+        axon = w.service_port("axonserver", 8124)
+        env["AXON_PORT"] = str(axon)
+        _wait_tcp(axon)
 
 
 def start_infra(w: Workspace) -> None:

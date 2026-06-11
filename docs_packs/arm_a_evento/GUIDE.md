@@ -347,11 +347,17 @@ Consumers (Projectors, Sagas, Observers) run on the v2 consumer engine, configur
 
 `ConsumerEngineConfig` is a record bundling a `ConsumerProcessor`, a `ConsumerStateStore`
 (checkpoint / `isEnabled` probe), and a `DeadEventQueue` (DLQ). `inMemory(...)` wires
-in-memory implementations of the lock, state store, saga state store, dead-event queue,
-and dedupe store, and runs observers on a virtual-thread-per-task executor. For durable
-deployments you supply JDBC-backed SPI implementations instead (the lab uses
-MySQL/Postgres consumer state stores in its integration tests). For this skeleton, the
-in-memory default is sufficient unless the task says otherwise.
+in-memory implementations and is for demos/tests only.
+
+**This skeleton is pre-wired for DURABLE persistence** (do not change it): the
+`EventoConfiguration` builds the consumer engine from the JDBC consumer state store
+(`com.evento.consumer.state.store.jdbc.*`) backed by the provided PostgreSQL —
+`JdbcConsumerLock`, `JdbcConsumerStateStore`, `JdbcSagaStateStore`, `JdbcDeadEventQueue`,
+`JdbcDedupeStore`, with `FlywayMigrator.migrate(dataSource, SqlDialect.POSTGRES)` creating
+the `evento_v2_*` tables on start-up (own history table — no clash with your schema).
+So consumer checkpoints, saga state, the DLQ, and observer dedup all **survive a
+restart**. You never touch this wiring; just build your aggregates/projectors/sagas and
+persist any read-model state you add in Postgres too (not in memory).
 
 ### Exactly-once / ordering semantics the platform provides
 

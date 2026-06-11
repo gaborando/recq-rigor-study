@@ -27,9 +27,13 @@ Key points (verified against the framework's `evento-lab-microservices`):
   consumption per consumer; single-active consumption per context; replayable
   event log (a restarted consumer rebuilds its read model). You do not hand-roll
   idempotency, retries, or saga checkpoints — model them as RECQ components.
-- Consumer bundles (`orders`/`inventory`/`customers`) already set
-  `ConsumerEngineConfig::inMemory` in the pre-wired config; persistent state you
-  need (read models) goes in that service's own Postgres (`*_DB_URL`).
+- **Durable by default.** The pre-wired config of the stateful services
+  (`orders`/`inventory`/`customers`) uses the **JDBC consumer state store**
+  backed by that service's own Postgres — consumer checkpoints, saga state,
+  dead-letter queue and observer dedup all survive a restart (Flyway creates
+  the `evento_v2_*` tables automatically). Any read-model/projection state you
+  add must likewise be persisted in that service's Postgres, not in memory.
+  `edge` is stateless (Invoker only) — no database, no consumer store.
 
 The single-bundle GUIDE.md/EXAMPLE.md annotation reference still applies
 verbatim — micro just distributes the same components across four bundles.

@@ -4,6 +4,11 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 [ -f .run-env ] && set -a && source .run-env && set +a
 SERVICES="edge orders inventory customers"
+# idempotent: kill any services started by a previous attempt before re-starting
+if [ -f .app-pids ]; then
+  while read -r pid; do [ -n "$pid" ] && kill "$pid" 2>/dev/null || true; done < .app-pids
+  sleep 2
+fi
 : > .app-pids
 for svc in $SERVICES; do
   JAR=$(ls $svc/target/*.jar 2>/dev/null | grep -v '\.original$' | head -1)

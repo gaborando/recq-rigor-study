@@ -34,6 +34,14 @@ profiles:
     cells:
       - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t1, topology: micro }
 
+  # $0 durability-plumbing validation: resilience phase in BOTH topologies.
+  dry-both:
+    reps: 1
+    budget: { max_wall_minutes: 30, max_turns: 60, max_tokens: 1_500_000 }
+    cells:
+      - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t1, topology: single }
+      - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t1, topology: micro }
+
   # Micro-topology pilot: independent multi-service delivery, 45-60min budgets.
   micro-pilot:
     reps: 1

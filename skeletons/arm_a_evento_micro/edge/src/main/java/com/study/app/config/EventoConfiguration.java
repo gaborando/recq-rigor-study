@@ -4,7 +4,6 @@ import com.evento.application.EventoBundle;
 import com.evento.application.bus.ClusterNodeAddress;
 import com.evento.application.bus.EventoServerMessageBusConfiguration;
 import com.study.app.EdgeApp;
-import com.evento.application.consumer.ConsumerEngineConfig;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -14,8 +13,10 @@ import org.springframework.context.annotation.Scope;
 
 /**
  * Pre-wired Evento bootstrap for the edge bundle — do not modify.
- * Components under com.study.app are discovered and registered automatically;
- * cross-bundle commands/queries/events route through the Evento server.
+ * Edge is a stateless API gateway: it only acts as an @Invoker (sends commands
+ * and dispatches queries through the gateways). It owns no aggregates,
+ * projectors, sagas or observers, so it has no consumers and needs no database
+ * or consumer state store — the default consumer engine is left in place.
  */
 @Configuration
 public class EventoConfiguration {
@@ -35,7 +36,6 @@ public class EventoConfiguration {
                 .setEventoServerMessageBusConfiguration(new EventoServerMessageBusConfiguration(
                         new ClusterNodeAddress(host, port)))
                 .setInjector(factory::getBean)
-                .setConsumerEngineConfigBuilder(ConsumerEngineConfig::inMemory)
                 .start();
     }
 }

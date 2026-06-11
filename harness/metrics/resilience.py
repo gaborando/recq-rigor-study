@@ -28,7 +28,7 @@ def _run_chaos_pytest(w: Workspace, scenario: str, report: Path) -> dict:
     injection via the CHAOS_SCENARIO env var + helper hooks in conftest."""
     env = {**os.environ,
            "BASE_URL": f"http://localhost:{w.app_port}",
-           "TASK": w.cell.task, "TOPOLOGY": "micro",
+           "TASK": w.cell.task, "TOPOLOGY": w.cell.topology,
            "CHAOS_SCENARIO": scenario,
            "WORKSPACE_DIR": str(w.dir)}
     cmd = ["uv", "run", "pytest",
@@ -44,19 +44,30 @@ def _run_chaos_pytest(w: Workspace, scenario: str, report: Path) -> dict:
             "detail": f"{s.get('passed', 0)} passed, {s.get('failed', 0)} failed"}
 
 
-def measure(w: Workspace) -> dict:
-    if w.cell.topology != "micro":
-        out = {"measured": False, "skip_reason": "single topology", "scenarios": []}
-        (w.root / "metrics" / "resilience.json").write_text(json.dumps(out, indent=2))
-        return out
+# single: only a full restart of the one app is meaningful (durability).
+# micro: the full distributed chaos catalog.
+SCENARIOS = {
+    "single": ["full_restart"],
+    "micro": ["crash_mid_burst", "full_restart", "saga_under_downed_dep"],
+}
 
+
+def _restore(w: Workspace) -> None:
+    """Bring the system back to a full healthy state between scenarios."""
+    if w.cell.topology == "micro":
+        sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
+    else:
+        sh(["bash", "scripts/app.sh", "restart"], cwd=w.dir, check=False, timeout=300)
+
+
+def measure(w: Workspace) -> dict:
     chaos_file = REPO / "acceptance" / w.cell.domain / "test_chaos.py"
     if not chaos_file.exists():
         out = {"measured": False, "skip_reason": "no chaos suite for domain", "scenarios": []}
         (w.root / "metrics" / "resilience.json").write_text(json.dumps(out, indent=2))
         return out
 
-    scenarios = ["crash_mid_burst", "full_restart", "saga_under_downed_dep"]
+    scenarios = SCENARIOS[w.cell.topology]
     results = []
     for sc in scenarios:
         t0 = time.monotonic()
@@ -64,8 +75,7 @@ def measure(w: Workspace) -> dict:
         results.append({"name": sc, "passed": r["passed"],
                         "recovery_seconds": round(time.monotonic() - t0, 1),
                         "detail": r["detail"]})
-        # always restore full service set between scenarios
-        sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
+        _restore(w)
 
     out = {"measured": True, "skip_reason": None, "scenarios": results}
     (w.root / "metrics" / "resilience.json").write_text(json.dumps(out, indent=2))
