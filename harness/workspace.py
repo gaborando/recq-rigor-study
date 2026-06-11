@@ -16,9 +16,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .config import REPO, RUNS, CellSpec, arm_cfg, load
-
-MICRO_SERVICES = ["edge", "orders", "inventory", "customers"]
+from .config import REPO, RUNS, CellSpec, arm_cfg, domain_services, load
 
 GIT_ID = ["-c", "user.email=harness@recq-rigor-study", "-c", "user.name=harness"]
 
@@ -72,6 +70,7 @@ class Workspace:
     compose_file: Path
     app_port: int = 0
     env: dict[str, str] = field(default_factory=dict)   # .run-env content
+    seeded_from: str | None = None                      # T2: the source T1 run_id
 
     @property
     def compose_project(self) -> str:
@@ -104,7 +103,7 @@ def _resolve_t1_workspace(cell: CellSpec) -> Path:
 
 
 def provision(cell: CellSpec) -> Workspace:
-    arm = arm_cfg(cell.arm, cell.topology)
+    arm = arm_cfg(cell.arm, cell.topology, cell.domain)
     run_id = make_run_id(cell)
     root = RUNS / run_id
     ws = root / "workspace"
@@ -114,12 +113,16 @@ def provision(cell: CellSpec) -> Workspace:
     (root / "logs").mkdir()
 
     # 1) project tree: skeleton (T1) or the same cell's T1 result (T2)
+    seeded_from = None
     if cell.task == "t1":
         shutil.copytree(REPO / arm["skeleton"], ws)
     else:
         src = _resolve_t1_workspace(cell)
+        seeded_from = src.parent.name   # the T1 run_id this T2 evolves
+        # seed the T1 source tree, dropping build/runtime leftovers so T2 starts
+        # from clean code (start_infra rewrites .run-env; up.sh rewrites .app-pids)
         shutil.copytree(src, ws, ignore=shutil.ignore_patterns(
-            ".git", "target", "app.log", ".app.pid", "nohup.out"))
+            ".git", "target", "*.log", ".app.pid", ".app-pids", ".run-env", "nohup.out"))
 
     # 2) spec + docs + acceptance suite (the TDD contract)
     spec_dir = REPO / "spec" / cell.domain
@@ -155,7 +158,7 @@ def provision(cell: CellSpec) -> Workspace:
     sh(["git", *GIT_ID, "commit", "-q", "-m", "baseline: skeleton + spec + acceptance suite"], cwd=ws)
 
     w = Workspace(run_id=run_id, cell=cell, root=root, dir=ws,
-                  compose_file=REPO / arm["runtime_compose"])
+                  compose_file=REPO / arm["runtime_compose"], seeded_from=seeded_from)
     return w
 
 
@@ -210,14 +213,16 @@ def start_infra(w: Workspace) -> None:
 def _start_infra_micro(w: Workspace) -> None:
     """Micro env contract consumed by scripts/up.sh and per-service properties:
     <SVC>_PORT (host), <SVC>_URL (http base), <SVC>_DB_URL (jdbc), broker coords."""
-    ports = {svc: free_port() for svc in MICRO_SERVICES}
+    services = domain_services(w.cell.domain)
+    ports = {svc: free_port() for svc in services}
     w.app_port = ports["edge"]  # the acceptance suite talks to edge only
     env = {"TASK": w.cell.task, "TOPOLOGY": "micro",
+           "SERVICES": " ".join(services),
            "PORT": str(ports["edge"]), "DB_USER": "postgres", "DB_PASS": "secret"}
-    for svc in MICRO_SERVICES:
+    for svc in services:
         env[f"{svc.upper()}_PORT"] = str(ports[svc])
         env[f"{svc.upper()}_URL"] = f"http://localhost:{ports[svc]}"
-        # edge owns no DB; the other three each get a dedicated Postgres container
+        # edge owns no DB; every other service gets a dedicated Postgres container
         if svc != "edge":
             env[f"{svc.upper()}_DB_URL"] = \
                 f"jdbc:postgresql://localhost:{w.service_port(f'{svc}-db', 5432)}/{svc}"

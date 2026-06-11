@@ -42,6 +42,15 @@ profiles:
       - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t1, topology: single }
       - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t1, topology: micro }
 
+  # $0 T2-plumbing validation: seed T2 from the null T1 (both topologies),
+  # verify seeding + T2 cancellation suite + change-impact + resilience-during-T2.
+  dry-t2:
+    reps: 1
+    budget: { max_wall_minutes: 30, max_turns: 60, max_tokens: 1_500_000 }
+    cells:
+      - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t2, topology: single }
+      - { domain: order-inventory, arm: arm_b_spring, model: null-agent, task: t2, topology: micro }
+
   # Micro-topology pilot: independent multi-service delivery, 45-60min budgets.
   micro-pilot:
     reps: 1

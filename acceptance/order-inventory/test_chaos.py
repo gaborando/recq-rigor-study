@@ -37,6 +37,9 @@ from conftest import (
 SCENARIO = os.environ.get("CHAOS_SCENARIO")
 TOPOLOGY = os.environ.get("TOPOLOGY", "single")
 WS = os.environ.get("WORKSPACE_DIR", "")
+# which stateful services the chaos scenarios hit (from the domain registry)
+CRASH_TARGET = os.environ.get("CRASH_TARGET", "inventory")
+DOWNED_DEP = os.environ.get("DOWNED_DEP", "customers")
 
 # chaos runs only under the resilience driver (CHAOS_SCENARIO set). full_restart
 # applies to BOTH topologies; the per-service scenarios are micro-only (guarded
@@ -86,7 +89,7 @@ def test_crash_mid_burst(client):
     t = threading.Thread(target=fire)
     t.start()
     time.sleep(0.3)                       # let some requests land
-    _script("restart-service.sh", "inventory")   # crash + recover mid-burst
+    _script("restart-service.sh", CRASH_TARGET)   # crash + recover mid-burst
     t.join()
 
     decided = wait_all_decided(client, oids, deadline=CHAOS_DEADLINE)
@@ -140,11 +143,11 @@ def test_saga_under_downed_dep(client):
     start_stock = get_json(client, f"/products/{pid}")["stock"]
     start_balance = get_json(client, f"/customers/{cid}")["balance"]
 
-    _script("restart-service.sh", "customers", "stop")   # take the dependency down
+    _script("restart-service.sh", DOWNED_DEP, "stop")    # take the dependency down
     oid = new_order_id()
     place_order(client, oid, cid, pid, quantity=1)
     time.sleep(2.0)                       # order is stuck mid-saga (cannot charge)
-    _script("restart-service.sh", "customers")           # bring it back
+    _script("restart-service.sh", DOWNED_DEP)            # bring it back
 
     o = {}
     def decided() -> bool:

@@ -37,11 +37,24 @@ class CellSpec:
     topology: str = "single"   # single | micro
 
 
-def arm_cfg(arm_key: str, topology: str) -> dict:
-    """Resolve an arm's config for a topology: base keys overlaid by
-    topologies.<topology> (skeleton, runtime_compose, micro_clause)."""
+def domain_cfg(domain: str) -> dict:
+    return load("domains")["domains"][domain]
+
+
+def domain_services(domain: str) -> list[str]:
+    """Ordered micro-topology service list; [0] is the stateless edge gateway."""
+    return domain_cfg(domain)["micro_services"]
+
+
+def arm_cfg(arm_key: str, topology: str, domain: str = "order-inventory") -> dict:
+    """Resolve an arm's config for a (topology, domain): base keys overlaid by
+    topologies.<topology>. For micro, skeleton/runtime_compose are resolved
+    per-domain (`skeletons/<arm>_micro_<domain>`, `runtime/<arm>_micro_<domain>`)."""
     arm = dict(load("arms")["arms"][arm_key])
-    topo = arm.pop("topologies", {}).get(topology, {})
+    topo = dict(arm.pop("topologies", {}).get(topology, {}))
+    if topology == "micro":
+        topo["skeleton"] = f"skeletons/{arm_key}_micro_{domain}"
+        topo["runtime_compose"] = f"runtime/{arm_key}_micro_{domain}/docker-compose.yaml"
     arm.update(topo)
     return arm
 

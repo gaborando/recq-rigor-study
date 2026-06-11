@@ -1,0 +1,22 @@
+# Domain registry. Each domain declares its micro-topology service decomposition
+# and which stateful service the chaos scenarios target. The single topology is
+# domain-agnostic (one deployable); these keys only drive the micro topology and
+# the resilience phase.
+#
+# micro_services: ordered; the FIRST is always the stateless `edge` API gateway
+# (no database); every other entry is a stateful service with its own Postgres.
+# chaos.crash_target : service the crash_mid_burst scenario kills + restarts.
+# chaos.downed_dep   : dependency the saga_under_downed_dep scenario stops.
+
+domains:
+  order-inventory:
+    micro_services: [edge, orders, inventory, customers]
+    chaos: { crash_target: inventory, downed_dep: customers }
+
+  todolist:
+    micro_services: [edge, lists, items, notifications]
+    chaos: { crash_target: items, downed_dep: notifications }
+
+  flight:
+    micro_services: [edge, flights, bookings, payments]
+    chaos: { crash_target: flights, downed_dep: payments }

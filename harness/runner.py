@@ -28,7 +28,7 @@ def run_cell(cell: CellSpec) -> RunRecord:
     print(f"[{w.run_id}] provisioned at {w.dir}")
     started_at = datetime.now(timezone.utc)
     started_ts = time.time()
-    seeded_from = None
+    seeded_from = w.seeded_from
     notes: list[str] = []
 
     try:

@@ -1,0 +1,12 @@
+--- boot attempt 1 (scripts/up.sh) ---
+started edge (pid 14143) on 60465
+started orders (pid 14151) on 60466
+started inventory (pid 14159) on 60467
+started customers (pid 14167) on 60468
+edge UP on 60465
+orders UP on 60466
+inventory UP on 60467
+customers UP on 60468
+all services UP
+
+

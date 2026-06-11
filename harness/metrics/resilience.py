@@ -19,17 +19,20 @@ import subprocess
 import time
 from pathlib import Path
 
-from ..config import REPO
+from ..config import REPO, domain_cfg
 from ..workspace import Workspace, sh
 
 
 def _run_chaos_pytest(w: Workspace, scenario: str, report: Path) -> dict:
     """Run a single chaos scenario test; the test coordinates with fault
     injection via the CHAOS_SCENARIO env var + helper hooks in conftest."""
+    chaos = domain_cfg(w.cell.domain)["chaos"]
     env = {**os.environ,
            "BASE_URL": f"http://localhost:{w.app_port}",
            "TASK": w.cell.task, "TOPOLOGY": w.cell.topology,
            "CHAOS_SCENARIO": scenario,
+           "CRASH_TARGET": chaos["crash_target"],
+           "DOWNED_DEP": chaos["downed_dep"],
            "WORKSPACE_DIR": str(w.dir)}
     cmd = ["uv", "run", "pytest",
            str(REPO / "acceptance" / w.cell.domain / "test_chaos.py"),
