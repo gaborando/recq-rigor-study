@@ -1,0 +1,12 @@
+--- boot attempt 1 (scripts/up.sh) ---
+started edge (pid 20118) on 54203
+started flights (pid 20126) on 54204
+started bookings (pid 20134) on 54205
+started payments (pid 20142) on 54206
+edge UP on 54203
+flights UP on 54204
+bookings UP on 54205
+payments UP on 54206
+all services UP
+
+

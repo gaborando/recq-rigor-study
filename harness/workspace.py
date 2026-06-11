@@ -8,6 +8,7 @@ ephemeral host ports, so parallel/sequential runs never collide.
 from __future__ import annotations
 
 import json
+import shlex
 import shutil
 import socket
 import subprocess
@@ -191,6 +192,13 @@ def _broker_env(w: Workspace, env: dict) -> None:
         _wait_tcp(axon)
 
 
+def _write_run_env(w: Workspace, env: dict) -> None:
+    """Write .run-env, shell-quoting values (e.g. SERVICES contains spaces) so
+    `source .run-env` under `set -euo pipefail` is safe."""
+    (w.dir / ".run-env").write_text(
+        "".join(f"{k}={shlex.quote(str(v))}\n" for k, v in env.items()))
+
+
 def start_infra(w: Workspace) -> None:
     """Bring up the per-run compose project and write .run-env."""
     w.compose("up", "-d", "--wait")
@@ -207,7 +215,7 @@ def start_infra(w: Workspace) -> None:
     env["DB_USER"] = "postgres"
     env["DB_PASS"] = "secret"
     w.env = env
-    (w.dir / ".run-env").write_text("".join(f"{k}={v}\n" for k, v in env.items()))
+    _write_run_env(w, env)
 
 
 def _start_infra_micro(w: Workspace) -> None:
@@ -228,7 +236,7 @@ def _start_infra_micro(w: Workspace) -> None:
                 f"jdbc:postgresql://localhost:{w.service_port(f'{svc}-db', 5432)}/{svc}"
     _broker_env(w, env)
     w.env = env
-    (w.dir / ".run-env").write_text("".join(f"{k}={v}\n" for k, v in env.items()))
+    _write_run_env(w, env)
 
 
 def reset_infra(w: Workspace) -> None:

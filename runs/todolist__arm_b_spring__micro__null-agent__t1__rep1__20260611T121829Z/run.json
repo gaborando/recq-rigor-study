@@ -1,0 +1,135 @@
+{
+  "run_id": "todolist__arm_b_spring__micro__null-agent__t1__rep1__20260611T121829Z",
+  "schema_version": 1,
+  "cell": {
+    "domain": "todolist",
+    "arm": "arm_b_spring",
+    "model": "null-agent",
+    "model_id": "none",
+    "task": "t1",
+    "topology": "micro",
+    "rep": 1,
+    "seed": null
+  },
+  "env": {
+    "harness_git_sha": "217cb622838306c70c8a0d215d28b0d396404ddf",
+    "agent_cli": "null",
+    "agent_cli_version": "null",
+    "docker_image_digests": {
+      "postgres": "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae",
+      "evento_server": "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4",
+      "axon_server": "axoniq/axonserver:2025.1.4@sha256:12a9ec5835a389c3a71f2449df06aa514dbf4344fd9359171a61b99492c5c1bb",
+      "build_image": "maven:3.9-eclipse-temurin-21",
+      "k6": "grafana/k6:2.0.0"
+    },
+    "tool_versions": {
+      "python": "3.14.0"
+    },
+    "host": "Darwin arm64"
+  },
+  "budget": {
+    "max_wall_minutes": 30,
+    "max_turns": 60,
+    "max_tokens": 1500000,
+    "exhausted": false,
+    "exhausted_reason": null
+  },
+  "time": {
+    "started_at": "2026-06-11T12:18:29.408644Z",
+    "finished_at": "2026-06-11T12:18:50.805067Z",
+    "wall_seconds": 0.0,
+    "active_agent_seconds": null,
+    "seconds_to_first_green_build": null,
+    "seconds_to_all_green": null
+  },
+  "budget_spent": {
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "cache_tokens": null,
+    "turns": 0,
+    "tool_invocations": 0,
+    "cost_usd": 0.0,
+    "cost_source": "reported"
+  },
+  "quality_rework": {
+    "iterations_total": 0,
+    "iterations_after_first_test_run": null,
+    "loc_churned_after_first_test_run": null,
+    "files_touched_in_rework": null,
+    "rework_ratio": null,
+    "tests_failing_at_end": null
+  },
+  "performance": {
+    "measured": false,
+    "skip_reason": "app never booted",
+    "endpoints": [],
+    "overall_p95_ms": null,
+    "overall_rps": null,
+    "overall_error_rate": null,
+    "mem_app_rss_mb_peak": null,
+    "mem_app_rss_mb_avg": null,
+    "mem_jvm_heap_mb": null,
+    "mem_total_stack_mb": null
+  },
+  "functional": {
+    "builds_cleanly": true,
+    "boots_cleanly": false,
+    "boot_flaky": true,
+    "acceptance_pass_rate": null,
+    "acceptance_passed": null,
+    "acceptance_total": null,
+    "variant_pass_rate": null
+  },
+  "static_quality": {
+    "measured": false,
+    "loc_java": null,
+    "files_java": null,
+    "classes": null,
+    "cbo": null,
+    "wmc": null,
+    "lcom": null,
+    "rfc": null,
+    "dit": null,
+    "pmd_violations": null,
+    "pmd_violations_per_kloc": null
+  },
+  "conformance": {
+    "measured": true,
+    "rules": [
+      {
+        "rule": "command-side-independent-of-query-side",
+        "result": "inconclusive",
+        "violations": 0,
+        "detail": "scope empty: mandated structure absent"
+      },
+      {
+        "rule": "query-side-never-reaches-command-side",
+        "result": "inconclusive",
+        "violations": 0,
+        "detail": "scope empty: mandated structure absent"
+      },
+      {
+        "rule": "web-layer-free-of-persistence",
+        "result": "inconclusive",
+        "violations": 0,
+        "detail": "scope empty: mandated structure absent"
+      },
+      {
+        "rule": "no-cycles-between-layers",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      }
+    ],
+    "total_violations": 0,
+    "inconclusive_rules": 3,
+    "strict_confinement_would_fail": null
+  },
+  "resilience": {
+    "measured": false,
+    "skip_reason": "app never booted",
+    "scenarios": []
+  },
+  "t2": null,
+  "notes": []
+}

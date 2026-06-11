@@ -1,0 +1,17 @@
+{
+  "compile_failures": 0,
+  "test_runs": 0,
+  "first_test_ts": null,
+  "seconds_to_first_green_build": null,
+  "seconds_to_all_green": null,
+  "tokens_in": 0,
+  "tokens_out": 0,
+  "cache_tokens": null,
+  "turns": 0,
+  "tool_invocations": 0,
+  "cost_usd": 0.0,
+  "cost_source": "reported",
+  "active_agent_seconds": null,
+  "agent_wall_seconds": 0.0,
+  "killed_reason": null
+}

@@ -1,0 +1,5 @@
+--- boot attempt 1 (scripts/app.sh) ---
+waiting for http://localhost:51665/actuator/health ...
+app is UP (pid 17335)
+
+

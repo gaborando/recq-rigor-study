@@ -1,0 +1,12 @@
+--- boot attempt 1 (scripts/up.sh) ---
+
+.run-env: line 3: lists: command not found
+
+--- boot attempt 2 (scripts/up.sh) ---
+
+.run-env: line 3: lists: command not found
+
+--- boot attempt 3 (scripts/up.sh) ---
+
+.run-env: line 3: lists: command not found
+
