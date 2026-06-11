@@ -1,0 +1,34 @@
+x-pg: &pg
+  image: postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae
+  environment:
+    POSTGRES_PASSWORD: secret
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U postgres"]
+    interval: 2s
+    timeout: 3s
+    retries: 30
+
+services:
+  flights-db:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: flights }
+    ports: ["5432"]
+  bookings-db:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: bookings }
+    ports: ["5432"]
+  payments-db:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: payments }
+    ports: ["5432"]
+  axonserver:
+    image: axoniq/axonserver:2025.1.4@sha256:12a9ec5835a389c3a71f2449df06aa514dbf4344fd9359171a61b99492c5c1bb
+    environment:
+      AXONIQ_AXONSERVER_STANDALONE: "true"
+      AXONIQ_AXONSERVER_DEVMODE_ENABLED: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8024/actuator/health || exit 1"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+    ports: ["8024", "8124"]

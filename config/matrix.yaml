@@ -67,9 +67,41 @@ profiles:
       - { domain: order-inventory, arm: arm_a_evento, model: claude-sonnet, task: t1, topology: micro }
       - { domain: order-inventory, arm: arm_c_axon,   model: claude-sonnet, task: t1, topology: micro }
 
+  # Per-new-domain $0 plumbing validation (both topologies, null agent).
+  todolist-dry:
+    reps: 1
+    budget: { max_wall_minutes: 30, max_turns: 60, max_tokens: 1_500_000 }
+    cells:
+      - { domain: todolist, arm: arm_b_spring, model: null-agent, task: t1, topology: single }
+      - { domain: todolist, arm: arm_b_spring, model: null-agent, task: t1, topology: micro }
+  flight-dry:
+    reps: 1
+    budget: { max_wall_minutes: 30, max_turns: 60, max_tokens: 1_500_000 }
+    cells:
+      - { domain: flight, arm: arm_b_spring, model: null-agent, task: t1, topology: single }
+      - { domain: flight, arm: arm_b_spring, model: null-agent, task: t1, topology: micro }
+
+  # Per-new-domain Claude pilots (cost-gated — 3 arms x T1 x micro).
+  todolist-pilot:
+    reps: 1
+    budget: { max_wall_minutes: 60, max_turns: 120, max_tokens: 4_000_000 }
+    perf: { warmup_seconds: 30, duration_seconds: 120, vus: 20 }
+    cells:
+      - { domain: todolist, arm: arm_b_spring, model: claude-sonnet, task: t1, topology: micro }
+      - { domain: todolist, arm: arm_a_evento, model: claude-sonnet, task: t1, topology: micro }
+      - { domain: todolist, arm: arm_c_axon,   model: claude-sonnet, task: t1, topology: micro }
+  flight-pilot:
+    reps: 1
+    budget: { max_wall_minutes: 60, max_turns: 120, max_tokens: 4_000_000 }
+    perf: { warmup_seconds: 30, duration_seconds: 120, vus: 20 }
+    cells:
+      - { domain: flight, arm: arm_b_spring, model: claude-sonnet, task: t1, topology: micro }
+      - { domain: flight, arm: arm_a_evento, model: claude-sonnet, task: t1, topology: micro }
+      - { domain: flight, arm: arm_c_axon,   model: claude-sonnet, task: t1, topology: micro }
+
   full:
     topologies: [single, micro]
-    domains: [order-inventory, todolist]
+    domains: [order-inventory, todolist, flight]
     arms: [arm_a_evento, arm_b_spring, arm_c_axon]
     models: [claude-sonnet, openai-gpt, gemini, open-weights]
     tasks: [t1, t2]            # t2 seeds from the same cell's t1 run

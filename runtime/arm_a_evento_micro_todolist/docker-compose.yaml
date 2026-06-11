@@ -1,0 +1,39 @@
+x-pg: &pg
+  image: postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae
+  environment:
+    POSTGRES_PASSWORD: secret
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U postgres"]
+    interval: 2s
+    timeout: 3s
+    retries: 30
+
+services:
+  lists-db:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: lists }
+    ports: ["5432"]
+  items-db:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: items }
+    ports: ["5432"]
+  notifications-db:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: notifications }
+    ports: ["5432"]
+  database:
+    <<: *pg
+    environment: { POSTGRES_PASSWORD: secret, POSTGRES_DB: evento }
+  evento-server:
+    image: eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4
+    depends_on:
+      database: { condition: service_healthy }
+    environment:
+      evento_cluster_name: evento-server
+      evento_performance_capture_rate: "1"
+      evento_telemetry_ttl: "365"
+      evento_security_signing_key: RECQ_RIGOR_STUDY_SIGNING_SEED
+      spring_datasource_url: jdbc:postgresql://database:5432/evento
+      spring_datasource_username: postgres
+      spring_datasource_password: secret
+    ports: ["3000", "3030"]
