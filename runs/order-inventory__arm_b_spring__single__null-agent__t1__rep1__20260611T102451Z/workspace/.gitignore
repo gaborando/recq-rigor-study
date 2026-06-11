@@ -1,5 +1,0 @@
-target/
-app.log
-.app.pid
-.run-env
-nohup.out

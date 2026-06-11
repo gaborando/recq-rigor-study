@@ -89,13 +89,13 @@ class Workspace:
 
 def make_run_id(cell: CellSpec) -> str:
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    return (f"{cell.domain}__{cell.arm}__{cell.topology}__{cell.model}__"
+    return (f"{cell.domain}__{cell.arm}__{cell.model}__"
             f"{cell.task}__rep{cell.rep}__{ts}")
 
 
 def _resolve_t1_workspace(cell: CellSpec) -> Path:
     """For T2: find the same cell's most recent T1 final workspace."""
-    prefix = (f"{cell.domain}__{cell.arm}__{cell.topology}__{cell.model}__"
+    prefix = (f"{cell.domain}__{cell.arm}__{cell.model}__"
               f"t1__rep{cell.rep}__")
     candidates = sorted(d for d in RUNS.iterdir() if d.name.startswith(prefix))
     if not candidates:
@@ -104,7 +104,7 @@ def _resolve_t1_workspace(cell: CellSpec) -> Path:
 
 
 def provision(cell: CellSpec) -> Workspace:
-    arm = arm_cfg(cell.arm, cell.topology, cell.domain)
+    arm = arm_cfg(cell.arm, cell.domain)
     run_id = make_run_id(cell)
     root = RUNS / run_id
     ws = root / "workspace"
@@ -144,9 +144,7 @@ def provision(cell: CellSpec) -> Workspace:
 
     docs_src = REPO / arm["docs_pack"]
     if docs_src.exists():
-        # MICRO.md is multi-service guidance — only ship it for micro topology
-        ignore = None if cell.topology == "micro" else shutil.ignore_patterns("MICRO.md")
-        shutil.copytree(docs_src, ws / "docs", dirs_exist_ok=True, ignore=ignore)
+        shutil.copytree(docs_src, ws / "docs", dirs_exist_ok=True)
 
     # 3) per-iteration auto-commit hook for the agent CLI
     claude_dir = ws / ".claude"
@@ -185,7 +183,7 @@ def _broker_env(w: Workspace, env: dict) -> None:
         env["EVENTO_PORT"] = str(transport)
         env["EVENTO_HTTP_PORT"] = str(w.service_port("evento-server", 3000))
         _wait_tcp(transport)                      # let the server become registration-ready
-    elif w.cell.arm == "arm_c_axon" and w.cell.topology == "micro":
+    elif w.cell.arm == "arm_c_axon":
         env["AXON_HOST"] = "localhost"
         axon = w.service_port("axonserver", 8124)
         env["AXON_PORT"] = str(axon)
@@ -200,31 +198,14 @@ def _write_run_env(w: Workspace, env: dict) -> None:
 
 
 def start_infra(w: Workspace) -> None:
-    """Bring up the per-run compose project and write .run-env."""
+    """Bring up the per-run compose project and write the micro env contract
+    (<SVC>_PORT host port, <SVC>_URL http base, <SVC>_DB_URL jdbc, broker coords)
+    consumed by scripts/up.sh and the per-service application.properties."""
     w.compose("up", "-d", "--wait")
-    if w.cell.topology == "micro":
-        _start_infra_micro(w)
-        return
-    w.app_port = free_port()
-    env = {"PORT": str(w.app_port), "TASK": w.cell.task, "TOPOLOGY": "single"}
-    _broker_env(w, env)
-    if w.cell.arm == "arm_a_evento":
-        env["DB_URL"] = f"jdbc:postgresql://localhost:{w.service_port('appdb', 5432)}/app"
-    else:
-        env["DB_URL"] = f"jdbc:postgresql://localhost:{w.service_port('database', 5432)}/app"
-    env["DB_USER"] = "postgres"
-    env["DB_PASS"] = "secret"
-    w.env = env
-    _write_run_env(w, env)
-
-
-def _start_infra_micro(w: Workspace) -> None:
-    """Micro env contract consumed by scripts/up.sh and per-service properties:
-    <SVC>_PORT (host), <SVC>_URL (http base), <SVC>_DB_URL (jdbc), broker coords."""
     services = domain_services(w.cell.domain)
     ports = {svc: free_port() for svc in services}
     w.app_port = ports["edge"]  # the acceptance suite talks to edge only
-    env = {"TASK": w.cell.task, "TOPOLOGY": "micro",
+    env = {"TASK": w.cell.task,
            "SERVICES": " ".join(services),
            "PORT": str(ports["edge"]), "DB_USER": "postgres", "DB_PASS": "secret"}
     for svc in services:
@@ -247,11 +228,6 @@ def reset_infra(w: Workspace) -> None:
 
 
 def teardown(w: Workspace) -> None:
-    # stop leftover app process(es) first, then infra
-    if w.cell.topology == "micro":
-        sh(["bash", "scripts/down.sh"], cwd=w.dir, check=False, timeout=120)
-    else:
-        pid = w.dir / ".app.pid"
-        if pid.exists():
-            sh(["bash", "scripts/app.sh", "stop"], cwd=w.dir, check=False)
+    # stop the service processes first, then infra
+    sh(["bash", "scripts/down.sh"], cwd=w.dir, check=False, timeout=120)
     w.compose("down", "-v", check=False)

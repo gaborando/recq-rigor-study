@@ -28,17 +28,13 @@ def _read_pids(w: Workspace) -> list[int]:
 
 
 def boot(w: Workspace, log: Path, attempts: int = 3) -> tuple[bool, bool, list[int]]:
-    """Returns (boots_cleanly, boot_flaky, app_pids).
-
-    Single topology: scripts/app.sh restart. Micro: scripts/up.sh starts all
-    services and waits each /actuator/health (edge is the suite's app_port)."""
-    script, action = ("scripts/up.sh", []) if w.cell.topology == "micro" \
-        else ("scripts/app.sh", ["restart"])
+    """Returns (boots_cleanly, boot_flaky, app_pids). scripts/up.sh starts every
+    service and waits each /actuator/health (edge is the suite's app_port)."""
     flaky = False
     for attempt in range(1, attempts + 1):
-        r = sh(["bash", script, *action], cwd=w.dir, check=False, timeout=600)
+        r = sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
         with open(log, "a") as f:
-            f.write(f"--- boot attempt {attempt} ({script}) ---\n{r.stdout}\n{r.stderr}\n")
+            f.write(f"--- boot attempt {attempt} ---\n{r.stdout}\n{r.stderr}\n")
         if r.returncode == 0:
             return True, flaky, _read_pids(w)
         flaky = True
@@ -47,10 +43,7 @@ def boot(w: Workspace, log: Path, attempts: int = 3) -> tuple[bool, bool, list[i
 
 
 def stop(w: Workspace) -> None:
-    if w.cell.topology == "micro":
-        sh(["bash", "scripts/down.sh"], cwd=w.dir, check=False, timeout=120)
-    else:
-        sh(["bash", "scripts/app.sh", "stop"], cwd=w.dir, check=False, timeout=60)
+    sh(["bash", "scripts/down.sh"], cwd=w.dir, check=False, timeout=120)
 
 
 def wait_healthy(port: int, timeout_s: int = 60) -> bool:
@@ -64,22 +57,3 @@ def wait_healthy(port: int, timeout_s: int = 60) -> bool:
             pass
         time.sleep(1)
     return False
-
-
-def strict_confinement_probe(w: Workspace, log: Path) -> bool | None:
-    """Arm A only: would the app fail to start with strictConfinement=true?
-    Returns True if start-up FAILS under strict mode (violations exist)."""
-    if w.cell.arm != "arm_a_evento" or w.cell.topology != "single":
-        return None
-    stop(w)
-    env_file = w.dir / ".run-env"
-    original = env_file.read_text()
-    try:
-        env_file.write_text(original + "EVENTO_STRICT=true\n")
-        r = sh(["bash", "scripts/app.sh", "restart"], cwd=w.dir, check=False, timeout=300)
-        with open(log, "a") as f:
-            f.write(f"--- strictConfinement probe (exit {r.returncode}) ---\n{r.stdout}\n{r.stderr}\n")
-        return r.returncode != 0
-    finally:
-        env_file.write_text(original)
-        stop(w)

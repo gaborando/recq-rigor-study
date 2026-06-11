@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 23238) on 60580
+started orders (pid 23246) on 60581
+started inventory (pid 23254) on 60582
+started customers (pid 23262) on 60583
+edge UP on 60580
+orders UP on 60581
+inventory UP on 60582
+customers UP on 60583
+all services UP
+
+

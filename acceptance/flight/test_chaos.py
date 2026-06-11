@@ -42,7 +42,6 @@ from conftest import (
 )
 
 SCENARIO = os.environ.get("CHAOS_SCENARIO")
-TOPOLOGY = os.environ.get("TOPOLOGY", "single")
 WS = os.environ.get("WORKSPACE_DIR", "")
 
 # the contended seat-inventory service and the charge dependency; the harness
@@ -50,14 +49,11 @@ WS = os.environ.get("WORKSPACE_DIR", "")
 CRASH_TARGET = os.environ.get("CRASH_TARGET", "flights")
 DOWNED_DEP = os.environ.get("DOWNED_DEP", "payments")
 
-# chaos runs only under the resilience driver (CHAOS_SCENARIO set). full_restart
-# applies to BOTH topologies; the per-service scenarios are micro-only (guarded
-# per-test below).
+# chaos runs only under the resilience driver (CHAOS_SCENARIO set).
 pytestmark = pytest.mark.skipif(
     not SCENARIO,
     reason="chaos scenarios run only under the resilience driver",
 )
-micro_only = pytest.mark.skipif(TOPOLOGY != "micro", reason="micro-topology scenario")
 
 CHAOS_DEADLINE = 4 * LONG_DEADLINE  # restarts + replay need generous convergence
 
@@ -71,17 +67,12 @@ def _script(name: str, *args: str) -> None:
 
 
 def _restart_all() -> None:
-    """Cold-restart the whole system: micro restarts every service; single
-    restarts the one app. The database container stays up either way, so
+    """Cold-restart every service (the database containers stay up), so
     durably-persisted state must survive."""
-    if TOPOLOGY == "micro":
-        _script("down.sh")
-        _script("up.sh")
-    else:
-        _script("app.sh", "restart")
+    _script("down.sh")
+    _script("up.sh")
 
 
-@micro_only
 def test_crash_mid_burst(client):
     """Kill the seat-inventory service (CRASH_TARGET) during a concurrent
     booking burst, restart it -> no seat double-booked, no seat lost,
@@ -158,7 +149,6 @@ def test_full_restart(client):
                what="state durability across a full restart")
 
 
-@micro_only
 def test_saga_under_downed_dep(client):
     """The charge dependency (DOWNED_DEP) is DOWN when a held seat must be
     charged. On recovery the booking resolves EXACTLY once — confirm or

@@ -1,9 +1,7 @@
 # Arm registry: the three technology constraints under test.
-# constraint_clause is the ONLY prose that differs between arms in the agent prompt.
-#
-# Each arm has topology-specific overrides under `topologies:`. The harness
-# resolves arm config as: base keys, overlaid by topologies.<single|micro>.
-# `micro_clause` is APPENDED to constraint_clause only for the micro topology.
+# constraint_clause is the ONLY prose that differs between arms in the agent prompt;
+# micro_clause is appended to it (the system is always a multi-service reactor —
+# the specific service decomposition is named in the domain's SPEC.md).
 
 arms:
   arm_a_evento:
@@ -18,20 +16,13 @@ arms:
       processes with @Saga components, and external/stateless work with
       @Service or @Observer components. All inter-component communication goes
       through the Evento gateways. Documentation is in ./docs.
-    topologies:
-      single:
-        skeleton: skeletons/arm_a_evento
-        runtime_compose: runtime/arm_a_evento/docker-compose.yaml
-      micro:
-        skeleton: skeletons/arm_a_evento_micro
-        runtime_compose: runtime/arm_a_evento_micro/docker-compose.yaml
-        micro_clause: >
-          Deliver FOUR independent Evento bundles (separate Spring Boot modules
-          in the provided Maven reactor): edge, orders, inventory, customers —
-          each its own deployable, each with its own database. Services integrate
-          ONLY through the Evento server (commands/queries/events across bundles);
-          no service reads another's database. The shared payload types live in
-          the api module. Per-service EventoConfiguration is pre-wired.
+    micro_clause: >
+      Deliver the services of the provided Maven reactor as independent Evento
+      bundles (the SPEC names the decomposition), each its own deployable with
+      its own database. Services integrate ONLY through the Evento server
+      (commands/queries/events across bundles); no service reads another's
+      database. Shared payload types live in the api module; the per-service
+      EventoConfiguration is pre-wired.
 
   arm_b_spring:
     name: "Plain Spring Boot"
@@ -43,19 +34,12 @@ arms:
       sourcing, messaging, or actor framework dependency. Any consistency,
       idempotency, or concurrency handling the tests require must be
       implemented by you. Documentation is in ./docs.
-    topologies:
-      single:
-        skeleton: skeletons/arm_b_spring
-        runtime_compose: runtime/arm_b_spring/docker-compose.yaml
-      micro:
-        skeleton: skeletons/arm_b_spring_micro
-        runtime_compose: runtime/arm_b_spring_micro/docker-compose.yaml
-        micro_clause: >
-          Deliver FOUR independent Spring Boot services in the provided Maven
-          reactor: edge, orders, inventory, customers — each its own deployable,
-          each with its own database. There is NO broker: services integrate over
-          HTTP/REST, and you must implement any cross-service idempotency, retry,
-          and saga compensation yourself. No service may read another's database.
+    micro_clause: >
+      Deliver the services of the provided Maven reactor as independent Spring
+      Boot services (the SPEC names the decomposition), each its own deployable
+      with its own database. There is NO broker: services integrate over
+      HTTP/REST, and you must implement any cross-service idempotency, retry,
+      and saga compensation yourself. No service may read another's database.
 
   arm_c_axon:
     name: "Axon Framework"
@@ -63,21 +47,13 @@ arms:
     archunit_arm: ARM_C
     constraint_clause: >
       You MUST implement the system using Axon Framework
-      (axon-spring-boot-starter with the embedded JPA event store — already
-      wired in the skeleton). Model the write side with @Aggregate classes
-      (commands -> events), the read side with @EventHandler projections, and
-      cross-aggregate processes with sagas or event processors.
-      Documentation is in ./docs.
-    topologies:
-      single:
-        skeleton: skeletons/arm_c_axon
-        runtime_compose: runtime/arm_c_axon/docker-compose.yaml
-      micro:
-        skeleton: skeletons/arm_c_axon_micro
-        runtime_compose: runtime/arm_c_axon_micro/docker-compose.yaml
-        micro_clause: >
-          Deliver FOUR independent Axon services in the provided Maven reactor:
-          edge, orders, inventory, customers — each its own deployable, each with
-          its own database. Services integrate through Axon Server (already
-          configured) for distributed command/event/query routing; no service
-          reads another's database. Shared messages live in the api module.
+      (axon-spring-boot-starter — already wired in the skeleton). Model the
+      write side with @Aggregate classes (commands -> events), the read side
+      with @EventHandler projections, and cross-aggregate processes with sagas
+      or event processors. Documentation is in ./docs.
+    micro_clause: >
+      Deliver the services of the provided Maven reactor as independent Axon
+      services (the SPEC names the decomposition), each its own deployable with
+      its own database. Services integrate through Axon Server (already
+      configured) for distributed command/event/query routing; no service reads
+      another's database. Shared messages live in the api module.

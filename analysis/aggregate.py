@@ -25,7 +25,6 @@ def flatten(record: dict) -> dict:
     row = {
         "run_id": record["run_id"],
         "domain": c["domain"], "arm": c["arm"], "model": c["model"],
-        "topology": c.get("topology", "single"),
         "task": c["task"], "rep": c["rep"],
         "budget_exhausted": record["budget"]["exhausted"],
         # TIME
@@ -88,7 +87,7 @@ def main() -> None:
     df.to_csv(OUT, index=False)
     print(f"{len(df)} runs -> {OUT}")
     if len(df):
-        print(df.groupby(["domain", "topology", "arm", "task"])[
+        print(df.groupby(["domain", "arm", "task"])[
             ["acceptance_pass_rate", "cost_usd", "wall_seconds"]].mean(numeric_only=True))
 
 

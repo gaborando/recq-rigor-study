@@ -25,19 +25,14 @@ class CostSource(StrEnum):
     ESTIMATED = "estimated"    # tokenizer estimate over transcript (flagged, last resort)
 
 
-class Topology(StrEnum):
-    SINGLE = "single"   # one deployable
-    MICRO = "micro"     # independent services, database-per-service
-
-
 class Cell(BaseModel):
-    """The experimental unit identity."""
+    """The experimental unit identity. The system is microservices (the only
+    topology); historical records may still carry a `topology` field, ignored here."""
     domain: str                 # e.g. "order-inventory"
     arm: str                    # registry key in config/arms.yaml
     model: str                  # registry key in config/models.yaml
     model_id: str               # the exact pinned model identifier
     task: Task
-    topology: Topology = Topology.SINGLE
     rep: int = Field(ge=1)
     seed: Optional[int] = None  # sampling seed when the CLI supports one
 
@@ -174,7 +169,7 @@ class ResilienceScenario(BaseModel):
 
 
 class Resilience(BaseModel):
-    """Micro-topology chaos outcomes (None/empty for single topology)."""
+    """Distributed-systems chaos outcomes (crash / full-restart / downed-dep)."""
     measured: bool = False
     skip_reason: Optional[str] = None
     scenarios: list[ResilienceScenario] = []

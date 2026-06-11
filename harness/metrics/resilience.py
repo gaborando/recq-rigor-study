@@ -1,14 +1,14 @@
-"""PERFORMANCE-adjacent: micro-topology chaos scenarios.
+"""Resilience: distributed-systems chaos scenarios against the multi-service system.
 
 Drives the workspace's kill/restart scripts between phases and re-runs the
-chaos pytest module (which holds the invariant assertions). Single topology
-returns measured=False.
+chaos pytest module (which holds the invariant assertions). The crash/downed
+targets come from the domain registry (config/domains.yaml).
 
 Scenarios (the chaos pytest file owns the load + invariant checks; this driver
 owns the fault injection ordering):
-  crash_mid_burst        — restart-service.sh inventory mid-test
-  full_restart           — down.sh + up.sh after a burst
-  saga_under_downed_dep  — stop customers, then bring back; order resolves once
+  crash_mid_burst        — restart CRASH_TARGET service mid-test
+  full_restart           — down.sh + up.sh after a burst (durability)
+  saga_under_downed_dep  — stop DOWNED_DEP, then bring back; resolves exactly once
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ def _run_chaos_pytest(w: Workspace, scenario: str, report: Path) -> dict:
     chaos = domain_cfg(w.cell.domain)["chaos"]
     env = {**os.environ,
            "BASE_URL": f"http://localhost:{w.app_port}",
-           "TASK": w.cell.task, "TOPOLOGY": w.cell.topology,
+           "TASK": w.cell.task,
            "CHAOS_SCENARIO": scenario,
            "CRASH_TARGET": chaos["crash_target"],
            "DOWNED_DEP": chaos["downed_dep"],
@@ -47,20 +47,13 @@ def _run_chaos_pytest(w: Workspace, scenario: str, report: Path) -> dict:
             "detail": f"{s.get('passed', 0)} passed, {s.get('failed', 0)} failed"}
 
 
-# single: only a full restart of the one app is meaningful (durability).
-# micro: the full distributed chaos catalog.
-SCENARIOS = {
-    "single": ["full_restart"],
-    "micro": ["crash_mid_burst", "full_restart", "saga_under_downed_dep"],
-}
+# The distributed chaos catalogue (all run against the multi-service system).
+SCENARIOS = ["crash_mid_burst", "full_restart", "saga_under_downed_dep"]
 
 
 def _restore(w: Workspace) -> None:
     """Bring the system back to a full healthy state between scenarios."""
-    if w.cell.topology == "micro":
-        sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
-    else:
-        sh(["bash", "scripts/app.sh", "restart"], cwd=w.dir, check=False, timeout=300)
+    sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
 
 
 def measure(w: Workspace) -> dict:
@@ -70,7 +63,7 @@ def measure(w: Workspace) -> dict:
         (w.root / "metrics" / "resilience.json").write_text(json.dumps(out, indent=2))
         return out
 
-    scenarios = SCENARIOS[w.cell.topology]
+    scenarios = SCENARIOS
     results = []
     for sc in scenarios:
         t0 = time.monotonic()

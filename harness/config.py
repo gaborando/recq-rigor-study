@@ -34,7 +34,6 @@ class CellSpec:
     rep: int
     budget: BudgetCfg
     perf: dict
-    topology: str = "single"   # single | micro
 
 
 def domain_cfg(domain: str) -> dict:
@@ -42,20 +41,16 @@ def domain_cfg(domain: str) -> dict:
 
 
 def domain_services(domain: str) -> list[str]:
-    """Ordered micro-topology service list; [0] is the stateless edge gateway."""
+    """Ordered service list; [0] is the stateless edge gateway, rest are stateful."""
     return domain_cfg(domain)["micro_services"]
 
 
-def arm_cfg(arm_key: str, topology: str, domain: str = "order-inventory") -> dict:
-    """Resolve an arm's config for a (topology, domain): base keys overlaid by
-    topologies.<topology>. For micro, skeleton/runtime_compose are resolved
-    per-domain (`skeletons/<arm>_micro_<domain>`, `runtime/<arm>_micro_<domain>`)."""
+def arm_cfg(arm_key: str, domain: str) -> dict:
+    """Resolve an arm's config for a domain. The system is microservices: the
+    skeleton/runtime_compose are the per-(arm,domain) reactor and compose."""
     arm = dict(load("arms")["arms"][arm_key])
-    topo = dict(arm.pop("topologies", {}).get(topology, {}))
-    if topology == "micro":
-        topo["skeleton"] = f"skeletons/{arm_key}_micro_{domain}"
-        topo["runtime_compose"] = f"runtime/{arm_key}_micro_{domain}/docker-compose.yaml"
-    arm.update(topo)
+    arm["skeleton"] = f"skeletons/{arm_key}_micro_{domain}"
+    arm["runtime_compose"] = f"runtime/{arm_key}_micro_{domain}/docker-compose.yaml"
     return arm
 
 
@@ -80,14 +75,13 @@ def expand_profile(profile: str) -> list[CellSpec]:
         for c in p["cells"]:
             for rep in range(1, reps + 1):
                 cells.append(CellSpec(c["domain"], c["arm"], c["model"], c["task"],
-                                      rep, budget, perf, c.get("topology", "single")))
+                                      rep, budget, perf))
     else:  # full cartesian product
-        for topology in p.get("topologies", ["single"]):
-            for domain in p["domains"]:
-                for arm in p["arms"]:
-                    for model in p["models"]:
-                        for task in p["tasks"]:
-                            for rep in range(1, reps + 1):
-                                cells.append(CellSpec(domain, arm, model, task,
-                                                      rep, budget, perf, topology))
+        for domain in p["domains"]:
+            for arm in p["arms"]:
+                for model in p["models"]:
+                    for task in p["tasks"]:
+                        for rep in range(1, reps + 1):
+                            cells.append(CellSpec(domain, arm, model, task,
+                                                  rep, budget, perf))
     return cells

@@ -41,19 +41,15 @@ from conftest import (
 )
 
 SCENARIO = os.environ.get("CHAOS_SCENARIO")
-TOPOLOGY = os.environ.get("TOPOLOGY", "single")
 WS = os.environ.get("WORKSPACE_DIR", "")
 CRASH_TARGET = os.environ.get("CRASH_TARGET", "items")
 DOWNED_DEP = os.environ.get("DOWNED_DEP", "notifications")
 
-# chaos runs only under the resilience driver (CHAOS_SCENARIO set). full_restart
-# applies to BOTH topologies; the per-service scenarios are micro-only (guarded
-# per-test below).
+# chaos runs only under the resilience driver (CHAOS_SCENARIO set).
 pytestmark = pytest.mark.skipif(
     not SCENARIO,
     reason="chaos scenarios run only under the resilience driver",
 )
-micro_only = pytest.mark.skipif(TOPOLOGY != "micro", reason="micro-topology scenario")
 
 CHAOS_DEADLINE = 4 * LONG_DEADLINE  # restarts + replay need generous convergence
 
@@ -67,17 +63,12 @@ def _script(name: str, *args: str) -> None:
 
 
 def _restart_all() -> None:
-    """Cold-restart the whole system: micro restarts every service; single
-    restarts the one app. The database container stays up either way, so
+    """Cold-restart every service (the database containers stay up), so
     durably-persisted state must survive."""
-    if TOPOLOGY == "micro":
-        _script("down.sh")
-        _script("up.sh")
-    else:
-        _script("app.sh", "restart")
+    _script("down.sh")
+    _script("up.sh")
 
 
-@micro_only
 def test_crash_mid_burst(client):
     """Kill the items service during a concurrent check-burst, restart it →
     no check lost, completion still EXACTLY-ONCE, conservation holds."""
@@ -153,7 +144,6 @@ def test_full_restart(client):
                what="completion state durable across a full restart")
 
 
-@micro_only
 def test_saga_under_downed_dep(client):
     """The notifications service is DOWN when a list completes. On recovery the
     completion notification is delivered EXACTLY once — no duplicate, no loss."""

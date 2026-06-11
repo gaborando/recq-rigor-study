@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 24878) on 62484
+started flights (pid 24886) on 62485
+started bookings (pid 24894) on 62486
+started payments (pid 24902) on 62487
+edge UP on 62484
+flights UP on 62485
+bookings UP on 62486
+payments UP on 62487
+all services UP
+
+

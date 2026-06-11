@@ -65,15 +65,13 @@ def run_cell(cell: CellSpec) -> RunRecord:
         if boots:
             func = functional.grade(w)
             perf_out = perf.measure(w, app_pids)
-            resil = resilience.measure(w)   # micro-only chaos; no-op for single
-        strict = build_boot.strict_confinement_probe(w, w.root / "logs" / "boot.log") \
-            if boots else None
+            resil = resilience.measure(w)   # multi-service chaos scenarios
 
         # ---- effort / rework / static / conformance ----
         eff = effort.compute(w, agent_res, started_ts)
         rw = rework.compute(w, eff.get("first_test_ts"), func.get("acceptance_failed"))
         sq = static_quality.compute(w)
-        conf = conformance.compute(w, strict)
+        conf = conformance.compute(w, None)   # strictConfinement probe was single-only
         ci = change_impact.compute(w, seeded_from)
 
         finished_at = datetime.now(timezone.utc)
@@ -84,7 +82,7 @@ def run_cell(cell: CellSpec) -> RunRecord:
             run_id=w.run_id,
             cell=Cell(domain=cell.domain, arm=cell.arm, model=cell.model,
                       model_id=model_cfg["model_id"], task=cell.task,
-                      topology=cell.topology, rep=cell.rep),
+                      rep=cell.rep),
             env=EnvInfo(
                 harness_git_sha=harness_git_sha(),
                 agent_cli=model_cfg["adapter"],

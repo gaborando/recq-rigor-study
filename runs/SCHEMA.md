@@ -3,14 +3,14 @@
 Each run persists under `runs/<run_id>/` where
 
 ```
-run_id = {domain}__{arm}__{topology}__{model}__{task}__rep{N}__{utc_compact_timestamp}
-e.g.     order-inventory__arm_a_evento__single__claude-sonnet__t1__rep1__20260607T141502Z
-         order-inventory__arm_a_evento__micro__claude-sonnet__t1__rep1__20260607T203041Z
+run_id = {domain}__{arm}__{model}__{task}__rep{N}__{utc_compact_timestamp}
+e.g.     order-inventory__arm_a_evento__claude-sonnet__t1__rep1__20260611T203041Z
 ```
 
-`topology` ∈ {`single` (one deployable), `micro` (independent services,
-database-per-service)}. Micro runs add a `resilience` block (chaos scenarios)
-to `run.json` and a `metrics/resilience.json`.
+The system is a microservices platform (independent services, database-per-service).
+Every run carries a `resilience` block (the chaos scenarios) in `run.json` plus a
+`metrics/resilience.json`. (Some archived records under `runs/` predate this and
+still carry a `__micro__`/`__single__` token in their id — historical only.)
 
 ## Directory layout
 
