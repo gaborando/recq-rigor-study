@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 45337) on 54938
+started flights (pid 45345) on 54939
+started bookings (pid 45353) on 54940
+started payments (pid 45361) on 54941
+edge UP on 54938
+flights UP on 54939
+bookings UP on 54940
+payments UP on 54941
+all services UP
+
+

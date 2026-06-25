@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 17573) on 54611
+started orders (pid 17581) on 54612
+started inventory (pid 17589) on 54613
+started customers (pid 17597) on 54614
+edge UP on 54611
+orders UP on 54612
+inventory UP on 54613
+customers UP on 54614
+all services UP
+
+

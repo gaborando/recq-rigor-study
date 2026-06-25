@@ -68,6 +68,24 @@ def get_json(client: httpx.Client, path: str) -> Any:
     return r.json()
 
 
+def read_settled(client: httpx.Client, path: str, deadline: float = DEADLINE) -> Any:
+    """GET that tolerates read-after-write lag: polls until the read model has
+    materialised (HTTP 200) or the deadline elapses. The read side is eventually
+    consistent — reading back a just-written entity may 404 briefly, which is a
+    design property, not a fault. Use this for reading freshly-written entities;
+    business invariants (conservation, exactly-once) are still asserted strictly
+    via wait_until elsewhere."""
+    end = time.monotonic() + deadline
+    last: httpx.Response | None = None
+    while time.monotonic() < end:
+        last = client.get(path)
+        if last.status_code == 200:
+            return last.json()
+        time.sleep(0.1)
+    assert False, (f"GET {path} not readable within {deadline}s "
+                   f"(last {last.status_code if last is not None else 'n/a'})")
+
+
 def parallel(callables: list[Callable[[], Any]], max_workers: int | None = None) -> list[Any]:
     """Fire callables concurrently; return results in submission order."""
     with ThreadPoolExecutor(max_workers=max_workers or len(callables)) as pool:

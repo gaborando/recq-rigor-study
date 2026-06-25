@@ -51,6 +51,14 @@ profiles:
       - { domain: flight, arm: arm_a_evento, model: claude-sonnet, task: t1 }
       - { domain: flight, arm: arm_c_axon,   model: claude-sonnet, task: t1 }
 
+  # Opus-only full matrix: all 9 (arm × domain) cells, T1, 1 rep — Claude outputs only.
+  opus-all:
+    domains: [order-inventory, todolist, flight]
+    arms: [arm_a_evento, arm_b_spring, arm_c_axon]
+    models: [claude-opus]
+    tasks: [t1]
+    reps: 1
+
   full:
     domains: [order-inventory, todolist, flight]
     arms: [arm_a_evento, arm_b_spring, arm_c_axon]

@@ -1,0 +1,16 @@
+--- boot attempt 1 ---
+started edge (pid 13333) on 64168
+started orders (pid 13341) on 64169
+started inventory (pid 13349) on 64170
+started customers (pid 13357) on 64171
+all services READY
+
+
+--- boot attempt 1 ---
+started edge (pid 16733) on 53578
+started orders (pid 16742) on 53579
+started inventory (pid 16750) on 53580
+started customers (pid 16758) on 53581
+all services READY
+
+

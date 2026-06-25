@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 38810) on 61708
+started lists (pid 38818) on 61709
+started items (pid 38826) on 61710
+started notifications (pid 38834) on 61711
+edge UP on 61708
+lists UP on 61709
+items UP on 61710
+notifications UP on 61711
+all services UP
+
+

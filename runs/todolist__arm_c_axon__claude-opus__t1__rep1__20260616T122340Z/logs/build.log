@@ -1,0 +1,165 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] arm_c_axon_micro_todolist                                          [pom]
+[INFO] shared messages                                                    [jar]
+[INFO] edge service                                                       [jar]
+[INFO] lists service                                                      [jar]
+[INFO] items service                                                      [jar]
+[INFO] notifications service                                              [jar]
+[INFO] 
+[INFO] ----------------< com.study:arm_c_axon_micro_todolist >-----------------
+[INFO] Building arm_c_axon_micro_todolist 1.0.0                           [1/6]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------------< com.study:api >----------------------------
+[INFO] Building shared messages 1.0.0                                     [2/6]
+[INFO]   from api/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/api/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/api/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/api/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ api ---
+[INFO] 
+[INFO] ---------------------------< com.study:edge >---------------------------
+[INFO] Building edge service 1.0.0                                        [3/6]
+[INFO]   from edge/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ edge ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ edge ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ edge ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/edge/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ edge ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ edge ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ edge ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ edge ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/edge/target/edge-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/edge/target/edge-1.0.0.jar.original
+[INFO] 
+[INFO] --------------------------< com.study:lists >---------------------------
+[INFO] Building lists service 1.0.0                                       [4/6]
+[INFO]   from lists/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ lists ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ lists ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ lists ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/lists/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ lists ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ lists ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ lists ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ lists ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/lists/target/lists-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/lists/target/lists-1.0.0.jar.original
+[INFO] 
+[INFO] --------------------------< com.study:items >---------------------------
+[INFO] Building items service 1.0.0                                       [5/6]
+[INFO]   from items/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ items ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ items ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ items ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/items/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ items ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ items ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ items ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ items ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/items/target/items-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/items/target/items-1.0.0.jar.original
+[INFO] 
+[INFO] ----------------------< com.study:notifications >-----------------------
+[INFO] Building notifications service 1.0.0                               [6/6]
+[INFO]   from notifications/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ notifications ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ notifications ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ notifications ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/notifications/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ notifications ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ notifications ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ notifications ---
+[INFO] Building jar: /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/notifications/target/notifications-1.0.0.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ notifications ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/notifications/target/notifications-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/todolist__arm_c_axon__claude-opus__t1__rep1__20260616T122340Z/workspace/notifications/target/notifications-1.0.0.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for arm_c_axon_micro_todolist 1.0.0:
+[INFO] 
+[INFO] arm_c_axon_micro_todolist .......................... SUCCESS [  0.001 s]
+[INFO] shared messages .................................... SUCCESS [  0.620 s]
+[INFO] edge service ....................................... SUCCESS [  0.398 s]
+[INFO] lists service ...................................... SUCCESS [  0.153 s]
+[INFO] items service ...................................... SUCCESS [  0.069 s]
+[INFO] notifications service .............................. SUCCESS [  0.950 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.417 s
+[INFO] Finished at: 2026-06-16T14:44:31+02:00
+[INFO] ------------------------------------------------------------------------
+
+--- stderr ---

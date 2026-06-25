@@ -1,0 +1,196 @@
+{
+    "metrics": {
+        "http_req_duration{endpoint:book_seat,phase:load}": {
+            "min": 0.156,
+            "med": 0.59,
+            "max": 27.704,
+            "p(90)": 1.362,
+            "p(95)": 1.973,
+            "avg": 0.8264404999335172,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "data_received": {
+            "rate": 73604.8986694294,
+            "count": 11069866
+        },
+        "http_req_duration{expected_response:true}": {
+            "avg": 4.3283004517606445,
+            "min": 0.156,
+            "med": 2.606,
+            "max": 171.677,
+            "p(90)": 11.296600000000005,
+            "p(95)": 14.830599999999995
+        },
+        "http_req_sending": {
+            "min": 0.002,
+            "med": 0.014,
+            "max": 3.203,
+            "p(90)": 0.024,
+            "p(95)": 0.032,
+            "avg": 0.016431235201261888
+        },
+        "iteration_duration": {
+            "max": 535.555084,
+            "p(90)": 199.60460870000003,
+            "p(95)": 229.7522814,
+            "avg": 125.8682817008385,
+            "min": 100.283291,
+            "med": 104.6225625
+        },
+        "http_req_connecting": {
+            "avg": 0.0021924329123914764,
+            "min": 0,
+            "med": 0,
+            "max": 1.342,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "http_req_failed": {
+            "passes": 4113,
+            "fails": 16159,
+            "value": 0.2028906866614049
+        },
+        "iterations": {
+            "count": 20270,
+            "rate": 134.77771962454955
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "http_req_duration{endpoint:get_booking,phase:load}": {
+            "avg": 6.795445126227219,
+            "min": 1.947,
+            "med": 4.7395,
+            "max": 44.387,
+            "p(90)": 13.303,
+            "p(95)": 16.632599999999993,
+            "thresholds": {
+                "p(95)<1000": false
+            }
+        },
+        "http_req_receiving": {
+            "avg": 0.05955011838989687,
+            "min": 0.005,
+            "med": 0.04,
+            "max": 50.616,
+            "p(90)": 0.105,
+            "p(95)": 0.14
+        },
+        "http_req_blocked": {
+            "max": 3.795,
+            "p(90)": 0.006,
+            "p(95)": 0.009,
+            "avg": 0.007101815311759345,
+            "min": 0,
+            "med": 0.003
+        },
+        "http_req_duration": {
+            "avg": 25.26269657655897,
+            "min": 0.156,
+            "med": 4.0024999999999995,
+            "max": 435.14,
+            "p(90)": 99.15680000000005,
+            "p(95)": 129.36474999999996
+        },
+        "data_sent": {
+            "count": 3775327,
+            "rate": 25102.612920423868
+        },
+        "checks": {
+            "passes": 16177,
+            "fails": 4093,
+            "value": 0.7980759743463246
+        },
+        "vus": {
+            "value": 20,
+            "min": 5,
+            "max": 20
+        },
+        "http_reqs": {
+            "count": 20272,
+            "rate": 134.7910178701958
+        },
+        "vus_max": {
+            "value": 25,
+            "min": 25,
+            "max": 25
+        },
+        "http_req_duration{endpoint:get_flight,phase:load}": {
+            "max": 435.14,
+            "p(90)": 166.7192,
+            "p(95)": 199.65449999999984,
+            "avg": 110.30736824324303,
+            "min": 4.778,
+            "med": 101.333,
+            "thresholds": {
+                "p(95)<1000": false
+            }
+        },
+        "http_req_waiting": {
+            "max": 435.096,
+            "p(90)": 99.11460000000004,
+            "p(95)": 129.27499999999998,
+            "avg": 25.186715222967617,
+            "min": 0.133,
+            "med": 3.9204999999999997
+        },
+        "http_req_duration{endpoint:get_stats,phase:load}": {
+            "min": 3.08,
+            "med": 7.422499999999999,
+            "max": 56.106,
+            "p(90)": 17.5296,
+            "p(95)": 22.29835,
+            "avg": 9.86714705882353,
+            "thresholds": {
+                "p(95)<1000": false
+            }
+        }
+    },
+    "setup_data": {
+        "customerId": "6616f087-64c4-4ba1-b1c1-1402b4f8dec8",
+        "flightId": "ccdcf6f1-3371-40c3-bc36-97a24d2f038b"
+    },
+    "root_group": {
+        "checks": {
+            "booking accepted": {
+                "name": "booking accepted",
+                "path": "::booking accepted",
+                "id": "3733babe142f399684fbc39fd6c0e66c",
+                "passes": 8036,
+                "fails": 0
+            },
+            "flight readable": {
+                "name": "flight readable",
+                "path": "::flight readable",
+                "id": "62101ccff295210775a68f367f27b3fd",
+                "passes": 0,
+                "fails": 4093
+            },
+            "stats readable": {
+                "fails": 0,
+                "name": "stats readable",
+                "path": "::stats readable",
+                "id": "0821972c8f8e5688adf1571263e18584",
+                "passes": 2074
+            },
+            "booking readable": {
+                "name": "booking readable",
+                "path": "::booking readable",
+                "id": "47299035441b0d8603c29bf960f780f6",
+                "passes": 6067,
+                "fails": 0
+            }
+        },
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {}
+    }
+}

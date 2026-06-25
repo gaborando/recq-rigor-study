@@ -1,0 +1,201 @@
+{
+  "run_id": "order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z",
+  "schema_version": 1,
+  "cell": {
+    "domain": "order-inventory",
+    "arm": "arm_a_evento",
+    "model": "claude-opus",
+    "model_id": "claude-opus-4-8",
+    "task": "t1",
+    "rep": 1,
+    "seed": null
+  },
+  "env": {
+    "harness_git_sha": "d65ff1ddfae392a3a44e1d42b6c8c13ef4ec1e43",
+    "agent_cli": "claude_code",
+    "agent_cli_version": "2.1.177 (Claude Code)",
+    "docker_image_digests": {
+      "postgres": "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae",
+      "evento_server": "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4",
+      "axon_server": "axoniq/axonserver:2025.1.4@sha256:12a9ec5835a389c3a71f2449df06aa514dbf4344fd9359171a61b99492c5c1bb",
+      "build_image": "maven:3.9-eclipse-temurin-21",
+      "k6": "grafana/k6:2.0.0"
+    },
+    "tool_versions": {
+      "python": "3.14.0"
+    },
+    "host": "Darwin arm64"
+  },
+  "budget": {
+    "max_wall_minutes": 60,
+    "max_turns": 120,
+    "max_tokens": 4000000,
+    "exhausted": false,
+    "exhausted_reason": null
+  },
+  "time": {
+    "started_at": "2026-06-15T19:40:21.817201Z",
+    "finished_at": "2026-06-15T20:10:25.221174Z",
+    "wall_seconds": 1238.88982725,
+    "active_agent_seconds": 1053.858,
+    "seconds_to_first_green_build": 887.8650639057159,
+    "seconds_to_all_green": 1126.43124294281
+  },
+  "budget_spent": {
+    "tokens_in": 4737,
+    "tokens_out": 80363,
+    "cache_tokens": 11365782,
+    "turns": 97,
+    "tool_invocations": 96,
+    "cost_usd": 10.031520500000001,
+    "cost_source": "reported"
+  },
+  "quality_rework": {
+    "iterations_total": 63,
+    "iterations_after_first_test_run": 0,
+    "loc_churned_after_first_test_run": 0,
+    "files_touched_in_rework": 0,
+    "rework_ratio": null,
+    "tests_failing_at_end": 0
+  },
+  "performance": {
+    "measured": true,
+    "skip_reason": null,
+    "endpoints": [
+      {
+        "endpoint": "place_order",
+        "p50_ms": 6.6,
+        "p95_ms": 16.805199999999996,
+        "p99_ms": 16.805199999999996,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_order",
+        "p50_ms": 3.3075,
+        "p95_ms": 13.457749999999999,
+        "p99_ms": 13.457749999999999,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_product",
+        "p50_ms": 3.349,
+        "p95_ms": 14.493249999999998,
+        "p99_ms": 14.493249999999998,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_stats",
+        "p50_ms": 2.928,
+        "p95_ms": 12.984899999999998,
+        "p99_ms": 12.984899999999998,
+        "rps": 0.0,
+        "error_rate": 0.0
+      }
+    ],
+    "overall_p95_ms": 15.206999999999995,
+    "overall_rps": 159.38875302593803,
+    "overall_error_rate": 0.0,
+    "consistency_stale_read_rate": 0.9794463087248322,
+    "mem_app_rss_mb_peak": 1496.8,
+    "mem_app_rss_mb_avg": 1445.3,
+    "mem_jvm_heap_mb": 32.8,
+    "mem_total_stack_mb": 2714.8
+  },
+  "functional": {
+    "builds_cleanly": true,
+    "boots_cleanly": true,
+    "boot_flaky": false,
+    "acceptance_pass_rate": 1.0,
+    "acceptance_passed": 16,
+    "acceptance_total": 16,
+    "variant_pass_rate": 1.0
+  },
+  "static_quality": {
+    "measured": false,
+    "loc_java": null,
+    "files_java": null,
+    "classes": null,
+    "cbo": null,
+    "wmc": null,
+    "lcom": null,
+    "rfc": null,
+    "dit": null,
+    "pmd_violations": null,
+    "pmd_violations_per_kloc": null
+  },
+  "conformance": {
+    "measured": true,
+    "rules": [
+      {
+        "rule": "command-side-independent-of-query-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "query-side-never-reaches-command-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "web-layer-free-of-persistence",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "no-cycles-between-layers",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "evento-read-side-never-sends-commands",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "evento-aggregate-independent-of-query-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      }
+    ],
+    "total_violations": 0,
+    "inconclusive_rules": 0,
+    "strict_confinement_would_fail": null
+  },
+  "resilience": {
+    "measured": true,
+    "skip_reason": null,
+    "scenarios": [
+      {
+        "name": "crash_mid_burst",
+        "passed": true,
+        "recovery_seconds": 8.0,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "full_restart",
+        "passed": true,
+        "recovery_seconds": 14.6,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "saga_under_downed_dep",
+        "passed": false,
+        "recovery_seconds": 131.6,
+        "detail": "0 passed, 1 failed"
+      }
+    ]
+  },
+  "t2": null,
+  "notes": [
+    "resilience re-graded 2026-06-18T14:53:35Z on a fresh perf-free runtime (empty event store; decoupled from the perf-phase projector saturation). Original resilience preserved in metrics/resilience_pre_decouple.json."
+  ]
+}

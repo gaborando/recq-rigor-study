@@ -1,0 +1,8 @@
+--- boot attempt 1 ---
+started edge (pid 22565) on 60386
+started orders (pid 22573) on 60387
+started inventory (pid 22581) on 60388
+started customers (pid 22589) on 60389
+all services READY
+
+

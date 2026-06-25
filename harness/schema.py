@@ -104,7 +104,8 @@ class PerformanceKpi(BaseModel):
     endpoints: list[EndpointPerf] = []
     overall_p95_ms: Optional[float] = None
     overall_rps: Optional[float] = None
-    overall_error_rate: Optional[float] = None
+    overall_error_rate: Optional[float] = None   # availability faults only (5xx + transport)
+    consistency_stale_read_rate: Optional[float] = None  # read-after-write lag (by-design, not a fault)
     mem_app_rss_mb_peak: Optional[float] = None
     mem_app_rss_mb_avg: Optional[float] = None
     mem_jvm_heap_mb: Optional[float] = None

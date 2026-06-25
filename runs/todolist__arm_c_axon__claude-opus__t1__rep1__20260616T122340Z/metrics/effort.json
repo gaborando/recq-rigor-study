@@ -1,0 +1,17 @@
+{
+  "compile_failures": 0,
+  "test_runs": 4,
+  "first_test_ts": 1781613664.293183,
+  "seconds_to_first_green_build": 966.1139073371887,
+  "seconds_to_all_green": 1069.238418340683,
+  "tokens_in": 3859,
+  "tokens_out": 72719,
+  "cache_tokens": 4685677,
+  "turns": 49,
+  "tool_invocations": 48,
+  "cost_usd": 6.15128,
+  "cost_source": "reported",
+  "active_agent_seconds": 994.417,
+  "agent_wall_seconds": 1189.998764750002,
+  "killed_reason": null
+}

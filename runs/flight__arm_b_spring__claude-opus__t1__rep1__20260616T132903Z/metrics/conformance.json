@@ -1,0 +1,32 @@
+{
+  "measured": true,
+  "rules": [
+    {
+      "rule": "command-side-independent-of-query-side",
+      "result": "violation",
+      "violations": 42,
+      "detail": "Constructor <com.study.app.command.BookingStore.<init>(com.study.app.query.BookingRepository, com.study.app.query.NotificationRepository)> has parameter of type <com.study.app.query.BookingRepository>"
+    },
+    {
+      "rule": "query-side-never-reaches-command-side",
+      "result": "pass",
+      "violations": 0,
+      "detail": ""
+    },
+    {
+      "rule": "web-layer-free-of-persistence",
+      "result": "pass",
+      "violations": 0,
+      "detail": ""
+    },
+    {
+      "rule": "no-cycles-between-layers",
+      "result": "pass",
+      "violations": 0,
+      "detail": ""
+    }
+  ],
+  "strict_confinement_would_fail": null,
+  "total_violations": 42,
+  "inconclusive_rules": 0
+}

@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 22332) on 57333
+started orders (pid 22340) on 57334
+started inventory (pid 22348) on 57335
+started customers (pid 22356) on 57336
+edge UP on 57333
+orders UP on 57334
+inventory UP on 57335
+customers UP on 57336
+all services UP
+
+

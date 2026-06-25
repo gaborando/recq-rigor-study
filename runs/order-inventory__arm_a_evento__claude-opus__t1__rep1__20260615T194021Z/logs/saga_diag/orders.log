@@ -1,0 +1,537 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.14)
+
+2026-06-25T14:49:50.506+02:00  INFO 22573 --- [           main] com.study.app.OrdersApp                  : Starting OrdersApp v1.0.0 using Java 25.0.2 with PID 22573 (/Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z/workspace/orders/target/orders-1.0.0.jar started by ggalazzo in /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z/workspace)
+2026-06-25T14:49:50.508+02:00  INFO 22573 --- [           main] com.study.app.OrdersApp                  : No active profile set, falling back to 1 default profile: "default"
+2026-06-25T14:49:51.966+02:00  INFO 22573 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-25T14:49:52.031+02:00  INFO 22573 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 2 JPA repository interfaces.
+2026-06-25T14:49:52.535+02:00  INFO 22573 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 60387 (http)
+2026-06-25T14:49:52.548+02:00  INFO 22573 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-25T14:49:52.548+02:00  INFO 22573 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-06-25T14:49:52.581+02:00  INFO 22573 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-25T14:49:52.581+02:00  INFO 22573 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1999 ms
+2026-06-25T14:49:52.838+02:00  INFO 22573 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-25T14:49:52.882+02:00  INFO 22573 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.49.Final
+2026-06-25T14:49:52.924+02:00  INFO 22573 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-25T14:49:53.185+02:00  INFO 22573 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-25T14:49:53.210+02:00  INFO 22573 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-25T14:49:53.422+02:00  INFO 22573 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@131d977f
+2026-06-25T14:49:53.423+02:00  INFO 22573 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-25T14:49:53.473+02:00  INFO 22573 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.14
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-25T14:49:54.157+02:00  INFO 22573 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-25T14:49:54.210+02:00  INFO 22573 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-25T14:49:54.225+02:00  WARN 22573 --- [           main] c.e.c.s.PayloadTypeAllowlist             : event=deserialization_open detail="polymorphic default typing accepts any Serializable subtype (gadget-chain risk); set evento.serialization.allowed-packages or EVENTO_SERIALIZATION_ALLOWED_PACKAGES to a comma-separated application-package allowlist to harden"
+2026-06-25T14:49:54.238+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Discovery handlers in package com.study.app
+2026-06-25T14:49:54.270+02:00  INFO 22573 --- [           main] org.reflections.Reflections              : Reflections took 26 ms to scan 2 urls, producing 17 keys and 67 values
+2026-06-25T14:49:54.280+02:00  INFO 22573 --- [           main] c.e.a.manager.AggregateManager           : Aggregate command handler for ConfirmOrderCommand found in com.study.app.command.OrderAggregate
+2026-06-25T14:49:54.281+02:00  INFO 22573 --- [           main] c.e.a.manager.AggregateManager           : Aggregate command handler for CreateOrderCommand found in com.study.app.command.OrderAggregate
+2026-06-25T14:49:54.281+02:00  INFO 22573 --- [           main] c.e.a.manager.AggregateManager           : Aggregate command handler for RejectOrderCommand found in com.study.app.command.OrderAggregate
+2026-06-25T14:49:54.390+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectionManager          : Projection query handler for OrderStatsQuery found in com.study.app.query.StatsProjection
+2026-06-25T14:49:54.398+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectionManager          : Projection query handler for OrderByIdQuery found in com.study.app.query.OrderProjection
+2026-06-25T14:49:54.400+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderRejectedEvent found in com.study.app.query.OrderProjector
+2026-06-25T14:49:54.400+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderCreatedEvent found in com.study.app.query.OrderProjector
+2026-06-25T14:49:54.400+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderConfirmedEvent found in com.study.app.query.OrderProjector
+2026-06-25T14:49:54.400+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderRejectedEvent found in com.study.app.query.StatsProjector
+2026-06-25T14:49:54.400+02:00  INFO 22573 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderConfirmedEvent found in com.study.app.query.StatsProjector
+2026-06-25T14:49:54.403+02:00  INFO 22573 --- [           main] c.e.application.manager.SagaManager      : Saga event handler for ChargedEvent found in com.study.app.command.OrderSaga
+2026-06-25T14:49:54.403+02:00  INFO 22573 --- [           main] c.e.application.manager.SagaManager      : Saga event handler for OrderCreatedEvent found in com.study.app.command.OrderSaga
+2026-06-25T14:49:54.403+02:00  INFO 22573 --- [           main] c.e.application.manager.SagaManager      : Saga event handler for StockReservationFailedEvent found in com.study.app.command.OrderSaga
+2026-06-25T14:49:54.403+02:00  INFO 22573 --- [           main] c.e.application.manager.SagaManager      : Saga event handler for StockReservedEvent found in com.study.app.command.OrderSaga
+2026-06-25T14:49:54.403+02:00  INFO 22573 --- [           main] c.e.application.manager.SagaManager      : Saga event handler for ChargeFailedEvent found in com.study.app.command.OrderSaga
+2026-06-25T14:49:54.403+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Discovery Complete
+2026-06-25T14:49:54.422+02:00  WARN 22573 --- [           main] c.e.application.HandlerMetadataBuilder   : ASM invocation scan failed for void com.study.app.query.OrderProjector.on(com.study.app.domain.event.OrderRejectedEvent): null
+2026-06-25T14:49:54.423+02:00  WARN 22573 --- [           main] c.e.application.HandlerMetadataBuilder   : ASM invocation scan failed for void com.study.app.query.OrderProjector.on(com.study.app.domain.event.OrderCreatedEvent): null
+2026-06-25T14:49:54.423+02:00  WARN 22573 --- [           main] c.e.application.HandlerMetadataBuilder   : ASM invocation scan failed for void com.study.app.query.OrderProjector.on(com.study.app.domain.event.OrderConfirmedEvent): null
+2026-06-25T14:49:54.427+02:00  WARN 22573 --- [           main] c.e.application.HandlerMetadataBuilder   : ASM invocation scan failed for com.evento.common.modeling.messaging.query.Single com.study.app.query.StatsProjection.query(com.study.app.domain.query.OrderStatsQuery): null
+2026-06-25T14:49:54.498+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Starting EventoApplication orders
+2026-06-25T14:49:54.498+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Connecting to Evento Server (v2 wire)...
+2026-06-25T14:49:54.506+02:00  INFO 22573 --- [           main] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=INITIAL to=CONNECTING reason=start
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::allocateMemory has been called by io.netty.util.internal.PlatformDependent0$2 (jar:nested:/Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z/workspace/orders/target/orders-1.0.0.jar/!BOOT-INF/lib/netty-common-4.1.132.Final.jar!/)
+WARNING: Please consider reporting this to the maintainers of class io.netty.util.internal.PlatformDependent0$2
+WARNING: sun.misc.Unsafe::allocateMemory will be removed in a future release
+2026-06-25T14:49:54.566+02:00  INFO 22573 --- [49-d91903d3dd7d] c.e.t.state.ConnectionStateMachine       : event=state_transition connection=client:orders-c980b4c5-5d20-4bac-9e49-d91903d3dd7d from=DISCONNECTED to=CONNECTING reason=connect()
+2026-06-25T14:49:54.658+02:00  INFO 22573 --- [ntLoopGroup-2-1] c.e.t.state.ConnectionStateMachine       : event=state_transition connection=client:orders-c980b4c5-5d20-4bac-9e49-d91903d3dd7d from=CONNECTING to=HANDSHAKING reason=tcp_established
+2026-06-25T14:49:54.658+02:00  INFO 22573 --- [ntLoopGroup-2-1] c.e.t.state.ConnectionStateMachine       : event=state_transition connection=client:orders-c980b4c5-5d20-4bac-9e49-d91903d3dd7d from=HANDSHAKING to=CONNECTED reason=tcp_ready
+2026-06-25T14:49:54.659+02:00  INFO 22573 --- [ntLoopGroup-2-1] c.e.t.netty.NettyClientTransport         : event=client_connected remote=orders-c980b4c5-5d20-4bac-9e49-d91903d3dd7d host=localhost port=60383
+2026-06-25T14:49:54.659+02:00  INFO 22573 --- [49-d91903d3dd7d] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=CONNECTING to=HANDSHAKING reason=tcp_up force=true
+2026-06-25T14:49:54.710+02:00  INFO 22573 --- [49-d91903d3dd7d] c.e.a.c.connection.ConnectionSupervisor  : event=handshake_complete server_instance=iris-evento-server accepted_caps=[]
+2026-06-25T14:49:54.711+02:00  INFO 22573 --- [49-d91903d3dd7d] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=HANDSHAKING to=REGISTERING reason=after_welcome force=true
+2026-06-25T14:49:54.720+02:00  INFO 22573 --- [49-d91903d3dd7d] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=REGISTERING to=READY reason=registered force=true
+2026-06-25T14:49:54.722+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Starting projector consumers...
+2026-06-25T14:49:54.800+02:00  INFO 22573 --- [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:60378/orders (PostgreSQL 16.14)
+2026-06-25T14:49:54.828+02:00  INFO 22573 --- [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."evento_v2_schema_history" does not exist yet
+2026-06-25T14:49:54.831+02:00  INFO 22573 --- [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.014s)
+2026-06-25T14:49:54.844+02:00  INFO 22573 --- [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."evento_v2_schema_history" with baseline ...
+2026-06-25T14:49:54.867+02:00  INFO 22573 --- [           main] o.f.core.internal.command.DbBaseline     : Successfully baselined schema with version: 0
+2026-06-25T14:49:54.880+02:00  INFO 22573 --- [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
+2026-06-25T14:49:54.888+02:00  INFO 22573 --- [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - init v2 consumer state"
+2026-06-25T14:49:54.928+02:00  INFO 22573 --- [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.028s)
+2026-06-25T14:49:54.937+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Checking for projector event consumers (v2)
+2026-06-25T14:49:54.937+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Starting v2 engine for Projector: OrderProjector - Version: 1 - Context: *
+2026-06-25T14:49:54.938+02:00  INFO 22573 --- [           main] com.evento.application.EventoBundle      : Starting v2 engine for Projector: StatsProjector - Version: 1 - Context: *
+2026-06-25T14:49:54.947+02:00  INFO 22573 --- [erProjector_1_*] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:60378/orders (PostgreSQL 16.14)
+2026-06-25T14:49:54.962+02:00  INFO 22573 --- [erProjector_1_*] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.006s)
+2026-06-25T14:49:54.966+02:00  WARN 22573 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-25T14:49:54.972+02:00  INFO 22573 --- [erProjector_1_*] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2026-06-25T14:49:54.974+02:00  INFO 22573 --- [erProjector_1_*] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-06-25T14:49:54.981+02:00  INFO 22573 --- [erProjector_1_*] c.e.c.s.s.jdbc.JdbcConsumerStateStore    : JdbcConsumerStateStore: ensured v2 consumer-state schema
+2026-06-25T14:49:54.982+02:00  INFO 22573 --- [erProjector_1_*] c.e.c.s.s.jdbc.JdbcConsumerStateStore    : JdbcConsumerStateStore: (re)connected to database
+2026-06-25T14:49:55.348+02:00  INFO 22573 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-06-25T14:49:55.398+02:00  INFO 22573 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 60387 (http) with context path '/'
+2026-06-25T14:49:55.408+02:00  INFO 22573 --- [           main] com.study.app.OrdersApp                  : Started OrdersApp in 5.26 seconds (process running for 5.674)
+2026-06-25T14:49:56.134+02:00  INFO 22573 --- [erProjector_1_*] c.e.a.consumer.ProjectorEngine           : Projector head reached: OrderProjector - Version: 1 - Context: *
+2026-06-25T14:49:56.134+02:00  INFO 22573 --- [tsProjector_1_*] c.e.a.consumer.ProjectorEngine           : Projector head reached: StatsProjector - Version: 1 - Context: *
+2026-06-25T14:49:56.134+02:00  INFO 22573 --- [dle Thread (v2)] com.evento.application.EventoBundle      : All Projector (v2) Consumers head Reached! (in 1412 millis)
+2026-06-25T14:49:56.134+02:00  INFO 22573 --- [dle Thread (v2)] com.evento.application.EventoBundle      : Sending registration to enable the Bundle
+2026-06-25T14:49:56.135+02:00  INFO 22573 --- [dle Thread (v2)] com.evento.application.EventoBundle      : Starting v2 engine for Saga: OrderSaga - Version: 1 - Context: *
+2026-06-25T14:49:56.138+02:00  INFO 22573 --- [dle Thread (v2)] com.evento.application.EventoBundle      : Application Started!
+2026-06-25T14:49:56.472+02:00  INFO 22573 --- [io-60387-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-25T14:49:56.472+02:00  INFO 22573 --- [io-60387-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-25T14:49:56.473+02:00  INFO 22573 --- [io-60387-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-25T14:50:01.321+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 1)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:01.853+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 2)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:02.372+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 3)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:02.887+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 4)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:03.398+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 5)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:03.912+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 6)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:04.421+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 7)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:04.937+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 8)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:05.449+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 9)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:05.957+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 10)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:06.471+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.application.reference.SagaReference  : Event processing failed for saga OrderSaga event StockReservedEvent (attempt 11)
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no available handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no available handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+
+2026-06-25T14:50:06.478+02:00 ERROR 22573 --- [s_OrderSaga_1_*] c.e.c.m.consumer.ConsumerProcessor       : Event consumption error for saga OrderSaga event StockReservedEvent — moved to DLQ
+
+java.util.concurrent.ExecutionException: java.lang.IllegalStateException: no available handler for ChargeCommand
+	at java.base/java.util.concurrent.CompletableFuture.wrapInExecutionException(CompletableFuture.java:345) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:440) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2094) ~[na:na]
+	at com.study.app.command.OrderSaga.on(OrderSaga.java:44) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at com.evento.application.utils.ReflectionUtils.invoke(ReflectionUtils.java:70) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.reference.SagaReference.invoke(SagaReference.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.lambda$dispatch$0(SagaEngine.java:167) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.doTrack(TracingAgent.java:83) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.performance.TracingAgent.track(TracingAgent.java:65) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.dispatch(SagaEngine.java:164) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.common.messaging.consumer.ConsumerProcessor.consumeEventsForSaga(ConsumerProcessor.java:261) ~[evento-common-2.1.3.jar!/:na]
+	at com.evento.application.consumer.SagaEngine.run(SagaEngine.java:105) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.consumer.EngineSupervisor.lambda$wrap$0(EngineSupervisor.java:155) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$ThreadBoundFuture.run(ThreadPerTaskExecutor.java:323) ~[na:na]
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:456) ~[na:na]
+Caused by: java.lang.IllegalStateException: no available handler for ChargeCommand
+	at com.evento.application.client.EventoServerAdapter.lambda$request$0(EventoServerAdapter.java:108) ~[evento-bundle-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2206) ~[na:na]
+	at com.evento.application.client.correlation.BundleCorrelationTracker.complete(BundleCorrelationTracker.java:80) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.InboundDispatcher.dispatch(InboundDispatcher.java:67) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.application.client.connection.ConnectionSupervisor.onMessage(ConnectionSupervisor.java:328) ~[evento-bundle-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport.lambda$onMessage$0(NettyClientTransport.java:183) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.NettyClientTransport$1.lambda$initChannel$0(NettyClientTransport.java:99) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at com.evento.transport.netty.MessageInboundHandler.lambda$channelRead0$0(MessageInboundHandler.java:47) ~[evento-transport-netty-2.1.3.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:291) ~[na:na]
+	... 1 common frames omitted
+

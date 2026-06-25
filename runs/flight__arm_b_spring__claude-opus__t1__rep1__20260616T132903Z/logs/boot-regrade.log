@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 15459) on 51991
+started flights (pid 15467) on 51992
+started bookings (pid 15475) on 51993
+started payments (pid 15483) on 51994
+edge UP on 51991
+flights UP on 51992
+bookings UP on 51993
+payments UP on 51994
+all services UP
+
+

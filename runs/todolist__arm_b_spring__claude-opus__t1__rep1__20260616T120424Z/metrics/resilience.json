@@ -1,0 +1,24 @@
+{
+  "measured": true,
+  "skip_reason": null,
+  "scenarios": [
+    {
+      "name": "crash_mid_burst",
+      "passed": true,
+      "recovery_seconds": 7.0,
+      "detail": "1 passed, 0 failed"
+    },
+    {
+      "name": "full_restart",
+      "passed": true,
+      "recovery_seconds": 13.2,
+      "detail": "1 passed, 0 failed"
+    },
+    {
+      "name": "saga_under_downed_dep",
+      "passed": true,
+      "recovery_seconds": 9.4,
+      "detail": "1 passed, 0 failed"
+    }
+  ]
+}

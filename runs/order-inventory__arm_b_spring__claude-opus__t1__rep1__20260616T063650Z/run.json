@@ -1,0 +1,189 @@
+{
+  "run_id": "order-inventory__arm_b_spring__claude-opus__t1__rep1__20260616T063650Z",
+  "schema_version": 1,
+  "cell": {
+    "domain": "order-inventory",
+    "arm": "arm_b_spring",
+    "model": "claude-opus",
+    "model_id": "claude-opus-4-8",
+    "task": "t1",
+    "rep": 1,
+    "seed": null
+  },
+  "env": {
+    "harness_git_sha": "d65ff1ddfae392a3a44e1d42b6c8c13ef4ec1e43",
+    "agent_cli": "claude_code",
+    "agent_cli_version": "2.1.178 (Claude Code)",
+    "docker_image_digests": {
+      "postgres": "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae",
+      "evento_server": "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4",
+      "axon_server": "axoniq/axonserver:2025.1.4@sha256:12a9ec5835a389c3a71f2449df06aa514dbf4344fd9359171a61b99492c5c1bb",
+      "build_image": "maven:3.9-eclipse-temurin-21",
+      "k6": "grafana/k6:2.0.0"
+    },
+    "tool_versions": {
+      "python": "3.14.0"
+    },
+    "host": "Darwin arm64"
+  },
+  "budget": {
+    "max_wall_minutes": 60,
+    "max_turns": 120,
+    "max_tokens": 4000000,
+    "exhausted": false,
+    "exhausted_reason": null
+  },
+  "time": {
+    "started_at": "2026-06-16T06:36:51.259121Z",
+    "finished_at": "2026-06-16T07:03:18.567349Z",
+    "wall_seconds": 1355.737252084,
+    "active_agent_seconds": 1068.266,
+    "seconds_to_first_green_build": 757.5911848545074,
+    "seconds_to_all_green": null
+  },
+  "budget_spent": {
+    "tokens_in": 4999,
+    "tokens_out": 80039,
+    "cache_tokens": 7350269,
+    "turns": 84,
+    "tool_invocations": 83,
+    "cost_usd": 6.957651999999998,
+    "cost_source": "reported"
+  },
+  "quality_rework": {
+    "iterations_total": 42,
+    "iterations_after_first_test_run": 5,
+    "loc_churned_after_first_test_run": 0,
+    "files_touched_in_rework": 0,
+    "rework_ratio": null,
+    "tests_failing_at_end": 0
+  },
+  "performance": {
+    "measured": true,
+    "skip_reason": null,
+    "endpoints": [
+      {
+        "endpoint": "place_order",
+        "p50_ms": 4.908,
+        "p95_ms": 11.535499999999999,
+        "p99_ms": 11.535499999999999,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_order",
+        "p50_ms": 1.881,
+        "p95_ms": 6.772999999999999,
+        "p99_ms": 6.772999999999999,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_product",
+        "p50_ms": 1.908,
+        "p95_ms": 6.816249999999997,
+        "p99_ms": 6.816249999999997,
+        "rps": 0.0,
+        "error_rate": 0.0
+      },
+      {
+        "endpoint": "get_stats",
+        "p50_ms": 2.819,
+        "p95_ms": 8.915199999999997,
+        "p99_ms": 8.915199999999997,
+        "rps": 0.0,
+        "error_rate": 0.0
+      }
+    ],
+    "overall_p95_ms": 10.447,
+    "overall_rps": 161.69867283457899,
+    "overall_error_rate": 0.0,
+    "consistency_stale_read_rate": 0.0,
+    "mem_app_rss_mb_peak": 1200.1,
+    "mem_app_rss_mb_avg": 837.7,
+    "mem_jvm_heap_mb": 54.5,
+    "mem_total_stack_mb": 1361.2
+  },
+  "functional": {
+    "builds_cleanly": true,
+    "boots_cleanly": true,
+    "boot_flaky": false,
+    "acceptance_pass_rate": 1.0,
+    "acceptance_passed": 16,
+    "acceptance_total": 16,
+    "variant_pass_rate": 1.0
+  },
+  "static_quality": {
+    "measured": false,
+    "loc_java": null,
+    "files_java": null,
+    "classes": null,
+    "cbo": null,
+    "wmc": null,
+    "lcom": null,
+    "rfc": null,
+    "dit": null,
+    "pmd_violations": null,
+    "pmd_violations_per_kloc": null
+  },
+  "conformance": {
+    "measured": true,
+    "rules": [
+      {
+        "rule": "command-side-independent-of-query-side",
+        "result": "violation",
+        "violations": 14,
+        "detail": "Method <com.study.app.command.OrderRepository.stats()> has return type <com.study.app.query.Stats> in (OrderRepository.java:0)"
+      },
+      {
+        "rule": "query-side-never-reaches-command-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "web-layer-free-of-persistence",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "no-cycles-between-layers",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      }
+    ],
+    "total_violations": 14,
+    "inconclusive_rules": 0,
+    "strict_confinement_would_fail": null
+  },
+  "resilience": {
+    "measured": true,
+    "skip_reason": null,
+    "scenarios": [
+      {
+        "name": "crash_mid_burst",
+        "passed": true,
+        "recovery_seconds": 6.9,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "full_restart",
+        "passed": true,
+        "recovery_seconds": 11.9,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "saga_under_downed_dep",
+        "passed": true,
+        "recovery_seconds": 8.8,
+        "detail": "1 passed, 0 failed"
+      }
+    ]
+  },
+  "t2": null,
+  "notes": [
+    "resilience re-graded 2026-06-18T14:53:35Z on a fresh perf-free runtime (empty event store; decoupled from the perf-phase projector saturation). Original resilience preserved in metrics/resilience_pre_decouple.json."
+  ]
+}

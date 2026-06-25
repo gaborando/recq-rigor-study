@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -32,7 +33,10 @@ def boot(w: Workspace, log: Path, attempts: int = 3) -> tuple[bool, bool, list[i
     service and waits each /actuator/health (edge is the suite's app_port)."""
     flaky = False
     for attempt in range(1, attempts + 1):
-        r = sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
+        # grading boot: require full bundle-readiness (health UP is too early for
+        # broker bundles), so the suite never hits a not-yet-registered bundle.
+        r = sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600,
+               env={**os.environ, "READY_REQUIRE_BUNDLE": "1"})
         with open(log, "a") as f:
             f.write(f"--- boot attempt {attempt} ---\n{r.stdout}\n{r.stderr}\n")
         if r.returncode == 0:

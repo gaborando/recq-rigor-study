@@ -1,0 +1,50 @@
+{
+  "resilience_run_json_block": {
+    "measured": true,
+    "skip_reason": null,
+    "scenarios": [
+      {
+        "name": "crash_mid_burst",
+        "passed": false,
+        "recovery_seconds": 30.6,
+        "detail": "0 passed, 1 failed"
+      },
+      {
+        "name": "full_restart",
+        "passed": true,
+        "recovery_seconds": 23.0,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "saga_under_downed_dep",
+        "passed": true,
+        "recovery_seconds": 10.8,
+        "detail": "1 passed, 0 failed"
+      }
+    ]
+  },
+  "resilience_json": {
+    "measured": true,
+    "skip_reason": null,
+    "scenarios": [
+      {
+        "name": "crash_mid_burst",
+        "passed": false,
+        "recovery_seconds": 30.6,
+        "detail": "0 passed, 1 failed"
+      },
+      {
+        "name": "full_restart",
+        "passed": true,
+        "recovery_seconds": 23.0,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "saga_under_downed_dep",
+        "passed": true,
+        "recovery_seconds": 10.8,
+        "detail": "1 passed, 0 failed"
+      }
+    ]
+  }
+}

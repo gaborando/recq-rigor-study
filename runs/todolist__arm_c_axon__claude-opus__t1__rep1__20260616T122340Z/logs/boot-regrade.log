@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 20184) on 57102
+started lists (pid 20194) on 57103
+started items (pid 20202) on 57104
+started notifications (pid 20214) on 57105
+edge UP on 57102
+lists UP on 57103
+items UP on 57104
+notifications UP on 57105
+all services UP
+
+

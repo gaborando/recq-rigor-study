@@ -1,0 +1,138 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] arm_b_spring_micro_flight                                          [pom]
+[INFO] edge service                                                       [jar]
+[INFO] flights service                                                    [jar]
+[INFO] bookings service                                                   [jar]
+[INFO] payments service                                                   [jar]
+[INFO] 
+[INFO] ----------------< com.study:arm_b_spring_micro_flight >-----------------
+[INFO] Building arm_b_spring_micro_flight 1.0.0                           [1/5]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------------< com.study:edge >---------------------------
+[INFO] Building edge service 1.0.0                                        [2/5]
+[INFO]   from edge/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ edge ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ edge ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ edge ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/edge/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ edge ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ edge ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ edge ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ edge ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/edge/target/edge-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/edge/target/edge-1.0.0.jar.original
+[INFO] 
+[INFO] -------------------------< com.study:flights >--------------------------
+[INFO] Building flights service 1.0.0                                     [3/5]
+[INFO]   from flights/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ flights ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ flights ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ flights ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/flights/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ flights ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ flights ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ flights ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ flights ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/flights/target/flights-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/flights/target/flights-1.0.0.jar.original
+[INFO] 
+[INFO] -------------------------< com.study:bookings >-------------------------
+[INFO] Building bookings service 1.0.0                                    [4/5]
+[INFO]   from bookings/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ bookings ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ bookings ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ bookings ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/bookings/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ bookings ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ bookings ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ bookings ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ bookings ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/bookings/target/bookings-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/bookings/target/bookings-1.0.0.jar.original
+[INFO] 
+[INFO] -------------------------< com.study:payments >-------------------------
+[INFO] Building payments service 1.0.0                                    [5/5]
+[INFO]   from payments/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ payments ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ payments ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ payments ---
+[INFO] skip non existing resourceDirectory /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/payments/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ payments ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ payments ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ payments ---
+[INFO] 
+[INFO] --- spring-boot:3.5.14:repackage (repackage) @ payments ---
+[INFO] Replacing main artifact /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/payments/target/payments-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z/workspace/payments/target/payments-1.0.0.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for arm_b_spring_micro_flight 1.0.0:
+[INFO] 
+[INFO] arm_b_spring_micro_flight .......................... SUCCESS [  0.001 s]
+[INFO] edge service ....................................... SUCCESS [  0.881 s]
+[INFO] flights service .................................... SUCCESS [  0.140 s]
+[INFO] bookings service ................................... SUCCESS [  0.057 s]
+[INFO] payments service ................................... SUCCESS [  0.057 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.349 s
+[INFO] Finished at: 2026-06-18T16:55:01+02:00
+[INFO] ------------------------------------------------------------------------
+
+--- stderr ---

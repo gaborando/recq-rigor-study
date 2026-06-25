@@ -1,0 +1,94 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.14)
+
+2026-06-25T14:50:03.332+02:00  INFO 22712 --- [           main] com.study.app.CustomersApp               : Starting CustomersApp v1.0.0 using Java 25.0.2 with PID 22712 (/Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z/workspace/customers/target/customers-1.0.0.jar started by ggalazzo in /Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z/workspace)
+2026-06-25T14:50:03.334+02:00  INFO 22712 --- [           main] com.study.app.CustomersApp               : No active profile set, falling back to 1 default profile: "default"
+2026-06-25T14:50:03.949+02:00  INFO 22712 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-25T14:50:03.979+02:00  INFO 22712 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 2 JPA repository interfaces.
+2026-06-25T14:50:04.267+02:00  INFO 22712 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 60389 (http)
+2026-06-25T14:50:04.275+02:00  INFO 22712 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-25T14:50:04.276+02:00  INFO 22712 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-06-25T14:50:04.293+02:00  INFO 22712 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-25T14:50:04.293+02:00  INFO 22712 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 934 ms
+2026-06-25T14:50:04.435+02:00  INFO 22712 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-25T14:50:04.469+02:00  INFO 22712 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.49.Final
+2026-06-25T14:50:04.487+02:00  INFO 22712 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-25T14:50:04.652+02:00  INFO 22712 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-25T14:50:04.673+02:00  INFO 22712 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-25T14:50:04.803+02:00  INFO 22712 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61836cd9
+2026-06-25T14:50:04.804+02:00  INFO 22712 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-25T14:50:04.849+02:00  INFO 22712 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.14
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-25T14:50:05.297+02:00  INFO 22712 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-25T14:50:05.337+02:00  INFO 22712 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-25T14:50:05.349+02:00  WARN 22712 --- [           main] c.e.c.s.PayloadTypeAllowlist             : event=deserialization_open detail="polymorphic default typing accepts any Serializable subtype (gadget-chain risk); set evento.serialization.allowed-packages or EVENTO_SERIALIZATION_ALLOWED_PACKAGES to a comma-separated application-package allowlist to harden"
+2026-06-25T14:50:05.359+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Discovery handlers in package com.study.app
+2026-06-25T14:50:05.391+02:00  INFO 22712 --- [           main] org.reflections.Reflections              : Reflections took 26 ms to scan 2 urls, producing 15 keys and 64 values
+2026-06-25T14:50:05.399+02:00  INFO 22712 --- [           main] c.e.a.manager.AggregateManager           : Aggregate command handler for CreateCustomerCommand found in com.study.app.command.CustomerAggregate
+2026-06-25T14:50:05.399+02:00  INFO 22712 --- [           main] c.e.a.manager.AggregateManager           : Aggregate command handler for ChargeCommand found in com.study.app.command.CustomerAggregate
+2026-06-25T14:50:05.399+02:00  INFO 22712 --- [           main] c.e.a.manager.AggregateManager           : Aggregate command handler for DepositCommand found in com.study.app.command.CustomerAggregate
+2026-06-25T14:50:05.547+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectionManager          : Projection query handler for NotificationsByCustomerQuery found in com.study.app.query.NotificationProjection
+2026-06-25T14:50:05.560+02:00  INFO 22712 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-25T14:50:05.758+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectionManager          : Projection query handler for CustomerByIdQuery found in com.study.app.query.CustomerProjection
+2026-06-25T14:50:05.759+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderRejectedEvent found in com.study.app.query.NotificationProjector
+2026-06-25T14:50:05.759+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for OrderConfirmedEvent found in com.study.app.query.NotificationProjector
+2026-06-25T14:50:05.760+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for ChargedEvent found in com.study.app.query.CustomerProjector
+2026-06-25T14:50:05.760+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for CustomerCreatedEvent found in com.study.app.query.CustomerProjector
+2026-06-25T14:50:05.760+02:00  INFO 22712 --- [           main] c.e.a.manager.ProjectorManager           : Projector event handler for DepositedEvent found in com.study.app.query.CustomerProjector
+2026-06-25T14:50:05.760+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Discovery Complete
+2026-06-25T14:50:05.778+02:00  WARN 22712 --- [           main] c.e.application.HandlerMetadataBuilder   : ASM invocation scan failed for void com.study.app.query.NotificationProjector.on(com.study.app.domain.event.OrderRejectedEvent): null
+2026-06-25T14:50:05.778+02:00  WARN 22712 --- [           main] c.e.application.HandlerMetadataBuilder   : ASM invocation scan failed for void com.study.app.query.NotificationProjector.on(com.study.app.domain.event.OrderConfirmedEvent): null
+2026-06-25T14:50:05.833+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Starting EventoApplication customers
+2026-06-25T14:50:05.833+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Connecting to Evento Server (v2 wire)...
+2026-06-25T14:50:05.840+02:00  INFO 22712 --- [           main] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=INITIAL to=CONNECTING reason=start
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::allocateMemory has been called by io.netty.util.internal.PlatformDependent0$2 (jar:nested:/Users/ggalazzo/workspace/personal/recq-rigor-study/runs/order-inventory__arm_a_evento__claude-opus__t1__rep1__20260615T194021Z/workspace/customers/target/customers-1.0.0.jar/!BOOT-INF/lib/netty-common-4.1.132.Final.jar!/)
+WARNING: Please consider reporting this to the maintainers of class io.netty.util.internal.PlatformDependent0$2
+WARNING: sun.misc.Unsafe::allocateMemory will be removed in a future release
+2026-06-25T14:50:05.891+02:00  INFO 22712 --- [5d-e542b6a7332d] c.e.t.state.ConnectionStateMachine       : event=state_transition connection=client:customers-a343dc14-d03e-490f-bb5d-e542b6a7332d from=DISCONNECTED to=CONNECTING reason=connect()
+2026-06-25T14:50:05.957+02:00  INFO 22712 --- [ntLoopGroup-2-1] c.e.t.state.ConnectionStateMachine       : event=state_transition connection=client:customers-a343dc14-d03e-490f-bb5d-e542b6a7332d from=CONNECTING to=HANDSHAKING reason=tcp_established
+2026-06-25T14:50:05.957+02:00  INFO 22712 --- [ntLoopGroup-2-1] c.e.t.state.ConnectionStateMachine       : event=state_transition connection=client:customers-a343dc14-d03e-490f-bb5d-e542b6a7332d from=HANDSHAKING to=CONNECTED reason=tcp_ready
+2026-06-25T14:50:05.957+02:00  INFO 22712 --- [ntLoopGroup-2-1] c.e.t.netty.NettyClientTransport         : event=client_connected remote=customers-a343dc14-d03e-490f-bb5d-e542b6a7332d host=localhost port=60383
+2026-06-25T14:50:05.957+02:00  INFO 22712 --- [5d-e542b6a7332d] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=CONNECTING to=HANDSHAKING reason=tcp_up force=true
+2026-06-25T14:50:06.005+02:00  INFO 22712 --- [5d-e542b6a7332d] c.e.a.c.connection.ConnectionSupervisor  : event=handshake_complete server_instance=iris-evento-server accepted_caps=[]
+2026-06-25T14:50:06.006+02:00  INFO 22712 --- [5d-e542b6a7332d] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=HANDSHAKING to=REGISTERING reason=after_welcome force=true
+2026-06-25T14:50:06.014+02:00  INFO 22712 --- [5d-e542b6a7332d] c.e.a.c.connection.ConnectionSupervisor  : event=bundle_state_transition from=REGISTERING to=READY reason=registered force=true
+2026-06-25T14:50:06.015+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Starting projector consumers...
+2026-06-25T14:50:06.084+02:00  INFO 22712 --- [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:60380/customers (PostgreSQL 16.14)
+2026-06-25T14:50:06.112+02:00  INFO 22712 --- [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.015s)
+2026-06-25T14:50:06.122+02:00  INFO 22712 --- [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2026-06-25T14:50:06.123+02:00  INFO 22712 --- [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-06-25T14:50:06.131+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Checking for projector event consumers (v2)
+2026-06-25T14:50:06.131+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Starting v2 engine for Projector: NotificationProjector - Version: 1 - Context: *
+2026-06-25T14:50:06.132+02:00  INFO 22712 --- [           main] com.evento.application.EventoBundle      : Starting v2 engine for Projector: CustomerProjector - Version: 1 - Context: *
+2026-06-25T14:50:06.138+02:00  INFO 22712 --- [erProjector_1_*] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:60380/customers (PostgreSQL 16.14)
+2026-06-25T14:50:06.146+02:00  INFO 22712 --- [erProjector_1_*] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.003s)
+2026-06-25T14:50:06.152+02:00  INFO 22712 --- [erProjector_1_*] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2026-06-25T14:50:06.153+02:00  INFO 22712 --- [erProjector_1_*] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-06-25T14:50:06.154+02:00  WARN 22712 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-25T14:50:06.155+02:00  INFO 22712 --- [erProjector_1_*] c.e.c.s.s.jdbc.JdbcConsumerStateStore    : JdbcConsumerStateStore: ensured v2 consumer-state schema
+2026-06-25T14:50:06.155+02:00  INFO 22712 --- [erProjector_1_*] c.e.c.s.s.jdbc.JdbcConsumerStateStore    : JdbcConsumerStateStore: (re)connected to database
+2026-06-25T14:50:06.398+02:00  INFO 22712 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-06-25T14:50:06.434+02:00  INFO 22712 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 60389 (http) with context path '/'
+2026-06-25T14:50:06.444+02:00  INFO 22712 --- [           main] com.study.app.CustomersApp               : Started CustomersApp in 3.322 seconds (process running for 3.591)
+2026-06-25T14:50:07.000+02:00  INFO 22712 --- [io-60389-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-25T14:50:07.000+02:00  INFO 22712 --- [io-60389-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-25T14:50:07.001+02:00  INFO 22712 --- [io-60389-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-25T14:50:07.194+02:00  INFO 22712 --- [erProjector_1_*] c.e.a.consumer.ProjectorEngine           : Projector head reached: CustomerProjector - Version: 1 - Context: *
+2026-06-25T14:50:07.194+02:00  INFO 22712 --- [onProjector_1_*] c.e.a.consumer.ProjectorEngine           : Projector head reached: NotificationProjector - Version: 1 - Context: *
+2026-06-25T14:50:07.194+02:00  INFO 22712 --- [dle Thread (v2)] com.evento.application.EventoBundle      : All Projector (v2) Consumers head Reached! (in 1179 millis)
+2026-06-25T14:50:07.194+02:00  INFO 22712 --- [dle Thread (v2)] com.evento.application.EventoBundle      : Sending registration to enable the Bundle
+2026-06-25T14:50:07.196+02:00  INFO 22712 --- [dle Thread (v2)] com.evento.application.EventoBundle      : Application Started!

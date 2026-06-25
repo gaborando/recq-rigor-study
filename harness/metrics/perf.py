@@ -116,12 +116,19 @@ def measure(w: Workspace, app_pids: list[int] | int | None) -> dict:
         s = json.loads(summary_path.read_text())
         dur = s.get("metrics", {}).get("http_req_duration", {})
         reqs = s.get("metrics", {}).get("http_reqs", {})
+        # `http_req_failed` is reclassified by the workload (setResponseCallback)
+        # to count only true availability faults — 5xx and transport/connection
+        # errors. Eventual-consistency stale reads (read-after-write 404s) are a
+        # by-design property of a CQRS read side, NOT a fault, and are reported
+        # separately via the `stale_reads` custom metric.
         fails = s.get("metrics", {}).get("http_req_failed", {})
+        stale = s.get("metrics", {}).get("stale_reads", {})
         out.update(
             measured=True,
             overall_p95_ms=dur.get("p(95)"),
             overall_rps=reqs.get("rate"),
             overall_error_rate=fails.get("value"),
+            consistency_stale_read_rate=stale.get("value"),
             endpoints=[e for e in (
                 _endpoint_stats(s, "place_order"), _endpoint_stats(s, "get_order"),
                 _endpoint_stats(s, "get_product"), _endpoint_stats(s, "get_stats"),

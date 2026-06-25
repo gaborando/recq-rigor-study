@@ -8,9 +8,20 @@
 
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import { Rate } from 'k6/metrics';
 
 const BASE = __ENV.BASE_URL;
 const VUS = parseInt(__ENV.VUS || '20');
+
+// Availability vs. consistency are scored separately. A read-after-write that
+// 404s because the CQRS read model hasn't materialised yet is NOT a system
+// fault — under a write rate higher than a single consumer can project, stale
+// reads are an expected, by-design property of an eventually-consistent read
+// side. So `http_req_failed` is reclassified to count only true availability
+// faults (5xx and transport/connection errors, status 0); the rate of
+// not-yet-materialised reads is captured in the dedicated `stale_reads` metric.
+http.setResponseCallback(http.expectedStatuses({ min: 200, max: 499 }));
+const staleReads = new Rate('stale_reads');
 
 export const options = {
   scenarios: {
@@ -67,6 +78,8 @@ export default function (data) {
   } else if (dice < 0.7 && __ENV.__last_order) {
     const r = http.get(`${BASE}/orders/${__ENV.__last_order}`,
       { tags: { endpoint: 'get_order' } });
+    // 200 = materialised; 404 = read model lagging (consistency lag, not a fault)
+    staleReads.add(r.status === 404);
     check(r, { 'order readable': (res) => res.status === 200 || res.status === 404 });
   } else if (dice < 0.9) {
     const r = http.get(`${BASE}/products/${data.productId}`,

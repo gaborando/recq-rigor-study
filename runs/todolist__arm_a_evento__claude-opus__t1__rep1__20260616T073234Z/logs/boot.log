@@ -1,0 +1,8 @@
+--- boot attempt 1 ---
+started edge (pid 25945) on 61818
+started lists (pid 25953) on 61819
+started items (pid 25961) on 61820
+started notifications (pid 25969) on 61821
+all services READY
+
+

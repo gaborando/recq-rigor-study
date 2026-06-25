@@ -1,5 +1,0 @@
-{"rules":[{"rule":"command-side-independent-of-query-side","result":"inconclusive","violations":0,"detail":"scope empty: mandated structure absent"},{"rule":"query-side-never-reaches-command-side","result":"inconclusive","violations":0,"detail":"scope empty: mandated structure absent"},{"rule":"web-layer-free-of-persistence","result":"inconclusive","violations":0,"detail":"scope empty: mandated structure absent"},{"rule":"no-cycles-between-layers","result":"pass","violations":0,"detail":""},{"rule":"axon-aggregate-independent-of-query-side","result":"inconclusive","violations":0,"detail":"scope empty: mandated structure absent"},{"rule":"axon-query-side-never-sends-commands","result":"inconclusive","violations":0,"detail":"scope empty: mandated structure absent"}]}
-
-SLF4J(W): No SLF4J providers were found.
-SLF4J(W): Defaulting to no-operation (NOP) logger implementation
-SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.

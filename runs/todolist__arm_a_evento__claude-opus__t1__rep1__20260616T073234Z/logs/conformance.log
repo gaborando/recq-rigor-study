@@ -1,0 +1,5 @@
+{"rules":[{"rule":"command-side-independent-of-query-side","result":"pass","violations":0,"detail":""},{"rule":"query-side-never-reaches-command-side","result":"pass","violations":0,"detail":""},{"rule":"web-layer-free-of-persistence","result":"pass","violations":0,"detail":""},{"rule":"no-cycles-between-layers","result":"pass","violations":0,"detail":""},{"rule":"evento-read-side-never-sends-commands","result":"pass","violations":0,"detail":""},{"rule":"evento-aggregate-independent-of-query-side","result":"pass","violations":0,"detail":""}]}
+
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.

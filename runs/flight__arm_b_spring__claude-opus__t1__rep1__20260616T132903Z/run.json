@@ -1,0 +1,165 @@
+{
+  "run_id": "flight__arm_b_spring__claude-opus__t1__rep1__20260616T132903Z",
+  "schema_version": 1,
+  "cell": {
+    "domain": "flight",
+    "arm": "arm_b_spring",
+    "model": "claude-opus",
+    "model_id": "claude-opus-4-8",
+    "task": "t1",
+    "rep": 1,
+    "seed": null
+  },
+  "env": {
+    "harness_git_sha": "d65ff1ddfae392a3a44e1d42b6c8c13ef4ec1e43",
+    "agent_cli": "claude_code",
+    "agent_cli_version": "2.1.178 (Claude Code)",
+    "docker_image_digests": {
+      "postgres": "postgres:16@sha256:4b7183ac05f8ef417db21fd72d71047a4238340c261d3cc3ddb6d579ab5071ae",
+      "evento_server": "eventoframework/evento-server:2.1.0@sha256:b70d3af3f2f026e369c51a1837a33dc6f4edc16eb9c0cb02d010b59d7608e2b4",
+      "axon_server": "axoniq/axonserver:2025.1.4@sha256:12a9ec5835a389c3a71f2449df06aa514dbf4344fd9359171a61b99492c5c1bb",
+      "build_image": "maven:3.9-eclipse-temurin-21",
+      "k6": "grafana/k6:2.0.0"
+    },
+    "tool_versions": {
+      "python": "3.14.0"
+    },
+    "host": "Darwin arm64"
+  },
+  "budget": {
+    "max_wall_minutes": 60,
+    "max_turns": 120,
+    "max_tokens": 4000000,
+    "exhausted": false,
+    "exhausted_reason": null
+  },
+  "time": {
+    "started_at": "2026-06-16T13:29:04.058829Z",
+    "finished_at": "2026-06-16T13:46:20.060155Z",
+    "wall_seconds": 776.5190768339999,
+    "active_agent_seconds": 683.889,
+    "seconds_to_first_green_build": 586.2272319793701,
+    "seconds_to_all_green": null
+  },
+  "budget_spent": {
+    "tokens_in": 6790,
+    "tokens_out": 52157,
+    "cache_tokens": 3400882,
+    "turns": 49,
+    "tool_invocations": 48,
+    "cost_usd": 3.8869865000000003,
+    "cost_source": "reported"
+  },
+  "quality_rework": {
+    "iterations_total": 30,
+    "iterations_after_first_test_run": 4,
+    "loc_churned_after_first_test_run": 0,
+    "files_touched_in_rework": 0,
+    "rework_ratio": null,
+    "tests_failing_at_end": 0
+  },
+  "performance": {
+    "measured": true,
+    "skip_reason": null,
+    "endpoints": [
+      {
+        "endpoint": "get_stats",
+        "p50_ms": 10.18,
+        "p95_ms": 23.833599999999993,
+        "p99_ms": 23.833599999999993,
+        "rps": 0.0,
+        "error_rate": 0.0
+      }
+    ],
+    "overall_p95_ms": 19.696499999999993,
+    "overall_rps": 129.15788537134463,
+    "overall_error_rate": 0.20102251245918543,
+    "consistency_stale_read_rate": null,
+    "mem_app_rss_mb_peak": 1178.5,
+    "mem_app_rss_mb_avg": 756.7,
+    "mem_jvm_heap_mb": 48.3,
+    "mem_total_stack_mb": 1370.3
+  },
+  "functional": {
+    "builds_cleanly": true,
+    "boots_cleanly": true,
+    "boot_flaky": false,
+    "acceptance_pass_rate": 1.0,
+    "acceptance_passed": 19,
+    "acceptance_total": 19,
+    "variant_pass_rate": 1.0
+  },
+  "static_quality": {
+    "measured": false,
+    "loc_java": null,
+    "files_java": null,
+    "classes": null,
+    "cbo": null,
+    "wmc": null,
+    "lcom": null,
+    "rfc": null,
+    "dit": null,
+    "pmd_violations": null,
+    "pmd_violations_per_kloc": null
+  },
+  "conformance": {
+    "measured": true,
+    "rules": [
+      {
+        "rule": "command-side-independent-of-query-side",
+        "result": "violation",
+        "violations": 42,
+        "detail": "Constructor <com.study.app.command.BookingStore.<init>(com.study.app.query.BookingRepository, com.study.app.query.NotificationRepository)> has parameter of type <com.study.app.query.BookingRepository>"
+      },
+      {
+        "rule": "query-side-never-reaches-command-side",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "web-layer-free-of-persistence",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      },
+      {
+        "rule": "no-cycles-between-layers",
+        "result": "pass",
+        "violations": 0,
+        "detail": ""
+      }
+    ],
+    "total_violations": 42,
+    "inconclusive_rules": 0,
+    "strict_confinement_would_fail": null
+  },
+  "resilience": {
+    "measured": true,
+    "skip_reason": null,
+    "scenarios": [
+      {
+        "name": "crash_mid_burst",
+        "passed": true,
+        "recovery_seconds": 6.2,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "full_restart",
+        "passed": true,
+        "recovery_seconds": 14.2,
+        "detail": "1 passed, 0 failed"
+      },
+      {
+        "name": "saga_under_downed_dep",
+        "passed": true,
+        "recovery_seconds": 8.4,
+        "detail": "1 passed, 0 failed"
+      }
+    ]
+  },
+  "t2": null,
+  "notes": [
+    "resilience re-graded 2026-06-18T14:53:35Z on a fresh perf-free runtime (empty event store; decoupled from the perf-phase projector saturation). Original resilience preserved in metrics/resilience_pre_decouple.json."
+  ]
+}

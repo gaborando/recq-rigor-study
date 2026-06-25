@@ -1,0 +1,23 @@
+{
+  "measured": true,
+  "skip_reason": null,
+  "endpoints": [
+    {
+      "endpoint": "get_stats",
+      "p50_ms": 10.18,
+      "p95_ms": 23.833599999999993,
+      "p99_ms": 23.833599999999993,
+      "rps": 0.0,
+      "error_rate": 0.0
+    }
+  ],
+  "k6_wall_seconds": 180.8,
+  "overall_p95_ms": 19.696499999999993,
+  "overall_rps": 129.15788537134463,
+  "overall_error_rate": 0.20102251245918543,
+  "consistency_stale_read_rate": null,
+  "mem_app_rss_mb_peak": 1178.5,
+  "mem_app_rss_mb_avg": 756.7,
+  "mem_jvm_heap_mb": 48.3,
+  "mem_total_stack_mb": 1370.3
+}

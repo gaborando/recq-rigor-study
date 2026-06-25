@@ -1,0 +1,12 @@
+--- boot attempt 1 ---
+started edge (pid 81953) on 64092
+started flights (pid 81961) on 64093
+started bookings (pid 81969) on 64094
+started payments (pid 81977) on 64095
+edge UP on 64092
+flights UP on 64093
+bookings UP on 64094
+payments UP on 64095
+all services UP
+
+

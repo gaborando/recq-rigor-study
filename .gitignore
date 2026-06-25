@@ -23,3 +23,6 @@ analysis/results.csv
 runs/**/workspace/target/
 runs/**/.m2/
 runs/*/workspace/.git/
+
+# scratch stdout logs from runs/_*.py helpers
+runs/_*.log

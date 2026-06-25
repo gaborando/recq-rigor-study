@@ -52,8 +52,11 @@ SCENARIOS = ["crash_mid_burst", "full_restart", "saga_under_downed_dep"]
 
 
 def _restore(w: Workspace) -> None:
-    """Bring the system back to a full healthy state between scenarios."""
-    sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600)
+    """Bring the system back to a full healthy state between scenarios.
+    Require full bundle-readiness (not just health UP) so the next scenario's
+    setup can't hit a not-yet-registered broker bundle."""
+    sh(["bash", "scripts/up.sh"], cwd=w.dir, check=False, timeout=600,
+       env={**os.environ, "READY_REQUIRE_BUNDLE": "1"})
 
 
 def measure(w: Workspace) -> dict:

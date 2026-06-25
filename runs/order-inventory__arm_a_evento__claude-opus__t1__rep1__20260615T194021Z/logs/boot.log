@@ -1,0 +1,8 @@
+--- boot attempt 1 ---
+started edge (pid 6863) on 51431
+started orders (pid 6871) on 51432
+started inventory (pid 6879) on 51433
+started customers (pid 6887) on 51434
+all services READY
+
+

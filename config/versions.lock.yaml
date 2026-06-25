@@ -15,7 +15,7 @@ docker_images:
     ref: grafana/k6:2.0.0
     resolved_at: null
 frameworks:
-  evento_bundle: com.eventoframework:evento-bundle:2.1.0
+  evento_bundle: com.eventoframework:evento-bundle:2.1.3
   axon_spring_boot_starter: org.axonframework:axon-spring-boot-starter:4.13.1
   spring_boot: 3.5.14
   archunit: com.tngtech.archunit:archunit:1.4.1

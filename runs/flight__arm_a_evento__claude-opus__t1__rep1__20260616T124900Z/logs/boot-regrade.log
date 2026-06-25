@@ -1,0 +1,16 @@
+--- boot attempt 1 ---
+started edge (pid 14731) on 51424
+started flights (pid 14739) on 51425
+started bookings (pid 14747) on 51426
+started payments (pid 14755) on 51427
+all services READY
+
+
+--- boot attempt 1 ---
+started edge (pid 21116) on 59022
+started flights (pid 21125) on 59023
+started bookings (pid 21133) on 59024
+started payments (pid 21142) on 59025
+all services READY
+
+

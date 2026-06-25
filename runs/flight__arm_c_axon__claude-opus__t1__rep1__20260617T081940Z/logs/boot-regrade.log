@@ -1,0 +1,24 @@
+--- boot attempt 1 ---
+started edge (pid 16037) on 52609
+started flights (pid 16045) on 52610
+started bookings (pid 16053) on 52611
+started payments (pid 16061) on 52612
+edge UP on 52609
+flights UP on 52610
+bookings UP on 52611
+payments UP on 52612
+all services UP
+
+
+--- boot attempt 1 ---
+started edge (pid 21818) on 59470
+started flights (pid 21826) on 59471
+started bookings (pid 21834) on 59472
+started payments (pid 21842) on 59473
+edge UP on 59470
+flights UP on 59471
+bookings UP on 59472
+payments UP on 59473
+all services UP
+
+

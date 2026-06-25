@@ -1,8 +1,0 @@
-{
-  "iterations_total": 41,
-  "iterations_after_first_test_run": 5,
-  "loc_churned_after_first_test_run": 0,
-  "files_touched_in_rework": 0,
-  "rework_ratio": null,
-  "tests_failing_at_end": 0
-}

@@ -1,0 +1,32 @@
+{
+  "measured": true,
+  "rules": [
+    {
+      "rule": "command-side-independent-of-query-side",
+      "result": "violation",
+      "violations": 8,
+      "detail": "Method <com.study.app.command.ListService.create(java.util.UUID, java.lang.String)> calls constructor <com.study.app.query.ListSummary.<init>(java.util.UUID, java.lang.String, java.lang.String)> in (L"
+    },
+    {
+      "rule": "query-side-never-reaches-command-side",
+      "result": "pass",
+      "violations": 0,
+      "detail": ""
+    },
+    {
+      "rule": "web-layer-free-of-persistence",
+      "result": "pass",
+      "violations": 0,
+      "detail": ""
+    },
+    {
+      "rule": "no-cycles-between-layers",
+      "result": "pass",
+      "violations": 0,
+      "detail": ""
+    }
+  ],
+  "strict_confinement_would_fail": null,
+  "total_violations": 8,
+  "inconclusive_rules": 0
+}

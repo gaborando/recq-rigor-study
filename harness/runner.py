@@ -65,7 +65,26 @@ def run_cell(cell: CellSpec) -> RunRecord:
         if boots:
             func = functional.grade(w)
             perf_out = perf.measure(w, app_pids)
-            resil = resilience.measure(w)   # multi-service chaos scenarios
+            # Resilience on a FRESH, perf-free runtime. The perf phase's write
+            # load saturates the broker arms' single-consumer projectors; running
+            # chaos on that saturated state makes scenarios fail LIVENESS checks
+            # ("timed out waiting for N decisions") for throughput reasons, not
+            # resilience. Events are durable, so a plain reboot just replays the
+            # backlog — only an empty store (compose down -v) puts the projector
+            # at head. The chaos scenarios do their own small setup, so an empty
+            # store is correct. (Spring has no broker, so it is unaffected.)
+            build_boot.stop(w)
+            reset_infra(w)
+            rboots, _rflaky, _rpids = build_boot.boot(
+                w, w.root / "logs" / "boot-resilience.log")
+            if rboots:
+                resil = resilience.measure(w)   # multi-service chaos scenarios
+            else:
+                resil = {"measured": False,
+                         "skip_reason": "resilience runtime failed to re-boot",
+                         "scenarios": []}
+                notes.append("resilience runtime failed to re-boot for the "
+                             "perf-free chaos phase")
 
         # ---- effort / rework / static / conformance ----
         eff = effort.compute(w, agent_res, started_ts)

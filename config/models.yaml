@@ -11,6 +11,15 @@ models:
     status: active
     price_per_mtok: { input: 0, output: 0 }
 
+  claude-opus:
+    adapter: claude_code               # harness/agents/claude_code.py
+    model_id: "claude-opus-4-8"
+    status: active
+    price_per_mtok:
+      input: 5.00
+      output: 25.00
+      cache_read: 0.50
+
   claude-sonnet:
     adapter: claude_code               # harness/agents/claude_code.py
     model_id: "claude-sonnet-4-6"

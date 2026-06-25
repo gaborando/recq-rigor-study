@@ -1,0 +1,8 @@
+--- boot attempt 1 ---
+started edge (pid 42091) on 49767
+started flights (pid 42099) on 49768
+started bookings (pid 42107) on 49769
+started payments (pid 42115) on 49770
+all services READY
+
+
